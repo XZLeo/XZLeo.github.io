@@ -55,8 +55,8 @@ p {
 
 .research-image {
     display: block;
+    width: min(100%, 520px);
     max-width: 520px;
-    width: 100%;
     height: auto;
     border-radius: 5px;
     margin-top: 10px;
