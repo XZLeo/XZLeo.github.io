@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ECCV 2026 论文国别与方向分析</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600&family=Source+Sans+3:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --ink: #1a1a1a;
+      --muted: #5c5c5c;
+      --line: #d8d8d8;
+      --bg: #f7f6f3;
+      --paper: #fff;
+      --accent: #233c8e;
+      --bar: #3d5aab;
+      --bar2: #8a93a8;
+      --bar3: #c45c26;
+      --bar4: #2a7a62;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: "Source Sans 3", "Noto Serif SC", sans-serif;
+      line-height: 1.55;
+    }
+    header {
+      border-bottom: 1px solid var(--line);
+      background: var(--paper);
+      padding: 18px 22px;
+    }
+    header .wrap, main, footer { max-width: 1080px; margin: 0 auto; }
+    h1 { font-size: 1.55rem; margin: 0 0 6px; font-family: "Noto Serif SC", serif; }
+    h2 { font-size: 1.25rem; margin: 36px 0 10px; font-family: "Noto Serif SC", serif; }
+    h3 { font-size: 1.05rem; margin: 22px 0 8px; }
+    p { margin: 0 0 12px; }
+    .muted, .caption { color: var(--muted); font-size: 0.9rem; }
+    .caption { margin: 6px 0 18px; }
+    a { color: var(--accent); }
+    nav a { margin-right: 14px; text-decoration: none; }
+    nav a:hover { text-decoration: underline; }
+    main { padding: 22px; }
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+      margin: 16px 0 20px;
+    }
+    .stat {
+      background: var(--paper);
+      border: 1px solid var(--line);
+      padding: 12px 14px;
+    }
+    .stat b { display: block; font-size: 1.45rem; color: var(--accent); }
+    .stat span { font-size: 0.82rem; color: var(--muted); }
+    .note {
+      background: #eef1f8;
+      border-left: 3px solid var(--accent);
+      padding: 10px 14px;
+      margin: 14px 0 22px;
+      font-size: 0.92rem;
+    }
+    .tabs { display: flex; gap: 8px; flex-wrap: wrap; margin: 10px 0 14px; }
+    button.tab {
+      border: 1px solid var(--line);
+      background: var(--paper);
+      color: var(--ink);
+      padding: 6px 12px;
+      cursor: pointer;
+      font: inherit;
+    }
+    button.tab.active { background: var(--accent); color: #fff; border-color: var(--accent); }
+    .bars { display: flex; flex-direction: column; gap: 7px; margin: 8px 0 6px; }
+    .bar-row { display: grid; grid-template-columns: 168px 1fr 56px; gap: 8px; align-items: center; font-size: 0.88rem; }
+    .track { background: #e6e6e6; height: 14px; position: relative; }
+    .fill { height: 100%; background: var(--bar); }
+    .fill.g { background: var(--bar2); }
+    .fill.o { background: var(--bar3); }
+    .fill.s { background: var(--bar4); }
+    table { width: 100%; border-collapse: collapse; font-size: 0.88rem; background: var(--paper); }
+    th, td { border-bottom: 1px solid var(--line); padding: 6px 8px; text-align: left; }
+    th { background: #f0f0ee; font-weight: 600; }
+    td.num, th.num { text-align: right; white-space: nowrap; }
+    tr:nth-child(even) td { background: #fafaf8; }
+    .cols { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .cols3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; }
+    .card { background: var(--paper); border: 1px solid var(--line); padding: 12px 14px; }
+    .legend { display: flex; gap: 14px; flex-wrap: wrap; font-size: 0.82rem; color: var(--muted); margin: 4px 0 10px; }
+    .sw { display: inline-block; width: 12px; height: 12px; margin-right: 5px; vertical-align: -1px; }
+    footer { padding: 24px 22px 40px; color: var(--muted); font-size: 0.82rem; }
+    @media (max-width: 800px) {
+      .stats, .cols, .cols3 { grid-template-columns: 1fr; }
+      .bar-row { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap">
+      <nav>
+        <a href="index.html">Home</a>
+        <a href="research.html">Research</a>
+        <a href="https://eccv.ecva.net/">ECCV 2026</a>
+      </nav>
+      <h1>ECCV 2026 论文国别、方向与武汉课题组</h1>
+      <p class="muted">马尔默，2026 年 9 月 8–12 日 · Springer LNCS 17001–17078 · 2834 篇主会论文。数据来自大会官方虚拟站作者单位与领域关键词。</p>
+    </div>
+  </header>
+  <main>
+    <div class="stats">
+      <div class="stat"><b>2,834</b><span>主会论文</span></div>
+      <div class="stat"><b>39.9%</b><span>中国大陆一作</span></div>
+      <div class="stat"><b>52.2%</b><span>含中国大陆作者</span></div>
+      <div class="stat"><b>114</b><span>含武汉高校作者</span></div>
+    </div>
+    <div class="note">
+      <strong>统计口径。</strong>一作按第一作者第一单位映射国家（约 9% 单位未能可靠映射）。“含该国作者”按任一作者单位计，一篇论文可计入多国。香港、澳门、台湾单独列出。
+    </div>
+
+    <h2>各国论文占比</h2>
+    <p>中国大陆一作 1132 篇（39.9%），是美国（424 篇，15.0%）的 2.7 倍。大中华一作 46.5%，至少一名作者来自大中华 56.4%。韩国一作第三（9.2%）。</p>
+    <div class="tabs">
+      <button class="tab active" data-mode="first" type="button">第一作者国家</button>
+      <button class="tab" data-mode="any" type="button">含该国作者</button>
+    </div>
+    <h3 id="country-title">第一作者论文数（前 12）</h3>
+    <div id="country-bars" class="bars"></div>
+    <p class="caption">横轴：论文篇数。Source: ECCV 2026 virtual site · first-author mapping coverage 91%.</p>
+    <div style="overflow:auto">
+      <table id="country-table"></table>
+    </div>
+
+    <h2>中国论文方向 vs 大会总体</h2>
+    <p>18 个官方领域上，中国结构与大会接近，只是识别/分割、具身与生成略高，经典几何与理论略低，差值都在 1–2 个百分点。</p>
+    <div class="legend">
+      <span><i class="sw" style="background:var(--bar2)"></i>大会全体</span>
+      <span><i class="sw" style="background:var(--bar)"></i>中国大陆</span>
+    </div>
+    <div id="cn-bars" class="bars"></div>
+    <p class="caption">占该集合论文的百分比。第一标签。2834 篇 vs 1478 篇含中国大陆单位。</p>
+    <div class="cols">
+      <div>
+        <h3>中国相对更高</h3>
+        <table id="cn-up"></table>
+      </div>
+      <div>
+        <h3>中国相对更低</h3>
+        <table id="cn-down"></table>
+      </div>
+    </div>
+
+    <h2>瑞典、荷兰、法国</h2>
+    <p>东道主瑞典一作仅 11 篇（0.4%）。三国样本小，百分比当结构信号读：瑞典几何占一半，荷兰偏具身与三维，法国偏生成与理论。</p>
+    <div class="stats" style="grid-template-columns:repeat(3,1fr)">
+      <div class="stat"><b>20</b><span>瑞典 · 一作 11 · KTH / LiU / Lund / Chalmers</span></div>
+      <div class="stat"><b>31</b><span>荷兰 · 一作 14 · Amsterdam / Delft</span></div>
+      <div class="stat"><b>42</b><span>法国 · 一作 17 · Inria / IP Paris / Valeo</span></div>
+    </div>
+    <div class="legend">
+      <span><i class="sw" style="background:var(--bar2)"></i>大会</span>
+      <span><i class="sw" style="background:var(--bar3)"></i>瑞典</span>
+      <span><i class="sw" style="background:var(--bar4)"></i>荷兰</span>
+      <span><i class="sw" style="background:var(--bar)"></i>法国</span>
+    </div>
+    <div id="eu-bars" class="bars"></div>
+    <p class="caption">偏离最大的 10 个领域。瑞典几何 +40 个百分点，与中国“略疏几何”相反。</p>
+    <div class="cols3">
+      <div class="card"><h3>瑞典：几何占一半</h3><p class="muted">20 篇里 9 篇是几何/定位/匹配（45%，大会 5%）。RoMa v2、LoMa、SynFlow、PolyLayout。生成与具身几乎空白。</p></div>
+      <div class="card"><h3>荷兰：具身 + 三维</h3><p class="muted">具身/驾驶 16.1%（大会 6.8%）。Amsterdam 偏模型与 VLM，Delft 偏匹配与驾驶。视频理解偏低。</p></div>
+      <div class="card"><h3>法国：生成与理论</h3><p class="muted">视频生成 14.3%；鲁棒性/理论、配准、分割、底层修复各约 10%。具身仅 1 篇。</p></div>
+    </div>
+    <h3>18 个领域对照</h3>
+    <div style="overflow:auto"><table id="eu-table"></table></div>
+
+    <h2>Uncertainty / conformal / calibration</h2>
+    <p>大会没有单独的 uncertainty 领域。标题点名约 0.8%；摘要出现 uncertainty 约 3.5%。Conformal 只有 3 篇。</p>
+    <div class="stats">
+      <div class="stat"><b>22</b><span>标题点名 · 0.8%</span></div>
+      <div class="stat"><b>100</b><span>摘要含 uncertainty · 3.5%</span></div>
+      <div class="stat"><b>3</b><span>conformal · 0.11%</span></div>
+      <div class="stat"><b>12</b><span>严格置信度校准 · 0.4%</span></div>
+    </div>
+    <div class="note"><strong>calibration 容易误计。</strong>摘要里的 calibrat 大多是相机标定或 attention recalibration。按 temperature scaling / ECE / confidence calibration 收紧后剩 12 篇。</div>
+    <table>
+      <thead><tr><th>论文</th><th>标签</th></tr></thead>
+      <tbody>
+        <tr><td>Coordinate Singularities Break Conformal Coverage for Gaze and Head Pose</td><td>conformal</td></tr>
+        <tr><td>SPARC: Motion Forecasting with Conformal Bayesian Last Layers</td><td>conformal · Bayesian</td></tr>
+        <tr><td>Ice Cloud Geometry Retrieval with Calibrated Uncertainty</td><td>conformal · UQ</td></tr>
+        <tr><td>Quantile-Adaptive Temperature Scaling for Confidence Calibration</td><td>confidence calibration</td></tr>
+        <tr><td>FedLAS: Neural Network Calibration</td><td>校准</td></tr>
+        <tr><td>Rethinking Detection Calibration</td><td>检测校准</td></tr>
+        <tr><td>Auto3R: Data-driven Uncertainty Quantification</td><td>UQ</td></tr>
+        <tr><td>Bayesian Uncertainty Attribution-Guided Fine-Tuning</td><td>Bayesian UQ</td></tr>
+        <tr><td>Analytic Bayesian Uncertainty for LiDAR Segmentation</td><td>Bayesian UQ</td></tr>
+        <tr><td>另有约 13 篇标题含 Uncertainty-aware / Uncertainty-guided / Evidential</td><td>UQ 应用</td></tr>
+      </tbody>
+    </table>
+    <p class="caption">相对视频生成（8.7%）或 3DGS（8.0%），UQ 仍是小方向；uncertainty 多作为重建、驾驶、医学任务的模块出现。</p>
+
+    <h2>武汉高校课题组</h2>
+    <p>114 篇含武汉高校作者（4.0%），其中 53 篇末位作者是武汉教师。无 Oral，5 篇 Spotlight。华科与武大为主体。</p>
+    <div class="stats">
+      <div class="stat"><b>114</b><span>含武汉单位</span></div>
+      <div class="stat"><b>53</b><span>武汉教师末位主导</span></div>
+      <div class="stat"><b>35</b><span>末位主导课题组</span></div>
+      <div class="stat"><b>5</b><span>Spotlight</span></div>
+    </div>
+    <div class="legend">
+      <span><i class="sw" style="background:var(--bar2)"></i>含该校作者</span>
+      <span><i class="sw" style="background:var(--bar)"></i>该校教师末位主导</span>
+    </div>
+    <div id="wh-bars" class="bars"></div>
+    <h3>末位作者为武汉教师（按篇数）</h3>
+    <table id="wh-table"></table>
+    <p class="muted">课题组按论文末位作者归并。合作论文若末位不在武汉，只计入 114 篇参与。</p>
+  </main>
+  <footer>
+    分析日期 2026-09-13 · 数据：<a href="https://eccv.ecva.net/virtual/2026/papers.html">ECCV 2026 virtual site</a>、<a href="https://eccv.ecva.net/Conferences/2026/AcceptedPapers">Accepted Papers</a>。
+    本页为静态交互页面，可托管在 GitHub Pages。作者主页：<a href="https://xzleo.github.io">xzleo.github.io</a>
+  </footer>
+  <script>
+    const FIRST = [
+      {k:"中国大陆",v:1132,pct:39.94},{k:"美国",v:424,pct:14.96},{k:"韩国",v:260,pct:9.17},{k:"中国香港",v:152,pct:5.36},
+      {k:"德国",v:101,pct:3.56},{k:"英国",v:75,pct:2.65},{k:"新加坡",v:60,pct:2.12},{k:"澳大利亚",v:53,pct:1.87},
+      {k:"日本",v:44,pct:1.55},{k:"瑞士",v:35,pct:1.24},{k:"加拿大",v:31,pct:1.09},{k:"印度",v:26,pct:0.92}
+    ];
+    const FIRST_FULL = [
+      ...FIRST,
+      {k:"中国台湾",v:23,pct:0.81},{k:"意大利",v:22,pct:0.78},{k:"阿联酋",v:19,pct:0.67},
+      {k:"法国",v:17,pct:0.60},{k:"以色列",v:16,pct:0.56},{k:"荷兰",v:14,pct:0.49},{k:"瑞典",v:11,pct:0.39}
+    ];
+    const ANY = [
+      {k:"中国大陆",v:1478,pct:52.15},{k:"美国",v:838,pct:29.57},{k:"中国香港",v:357,pct:12.6},{k:"韩国",v:316,pct:11.15},
+      {k:"新加坡",v:210,pct:7.41},{k:"英国",v:177,pct:6.25},{k:"德国",v:173,pct:6.1},{k:"澳大利亚",v:141,pct:4.98},
+      {k:"日本",v:87,pct:3.07},{k:"瑞士",v:68,pct:2.4},{k:"加拿大",v:56,pct:1.98},{k:"阿联酋",v:44,pct:1.55}
+    ];
+    const ANY_MAP = {
+      "中国大陆":1478,"美国":838,"韩国":316,"中国香港":357,"德国":173,"英国":177,"新加坡":210,"澳大利亚":141,
+      "日本":87,"瑞士":68,"加拿大":56,"印度":39,"中国台湾":39,"意大利":43,"阿联酋":44,"法国":42,"荷兰":31,"瑞典":20,"以色列":23
+    };
+    const ANY_PCT = {
+      "中国大陆":52.15,"美国":29.57,"韩国":11.15,"中国香港":12.6,"德国":6.1,"英国":6.25,"新加坡":7.41,"澳大利亚":4.98,
+      "日本":3.07,"瑞士":2.4,"加拿大":1.98,"印度":1.38,"中国台湾":1.38,"意大利":1.52,"阿联酋":1.55,"法国":1.48,"荷兰":1.09,"瑞典":0.71,"以色列":0.81
+    };
+    const TOPICS = [
+      {s:"视频生成 / 数字人",all:8.68,cn:8.46,diff:-0.22,se:5,nl:9.68,fr:14.29,seN:1,nlN:3,frN:6},
+      {s:"视频理解 / 多模态",all:8.36,cn:9.34,diff:0.98,se:0,nl:3.23,fr:4.76,seN:0,nlN:1,frN:2},
+      {s:"3DGS / 神经渲染",all:7.97,cn:7.31,diff:-0.66,se:5,nl:3.23,fr:4.76,seN:1,nlN:1,frN:2},
+      {s:"图像生成 / 扩散",all:7.06,cn:8.32,diff:1.26,se:5,nl:0,fr:0,seN:1,nlN:0,frN:0},
+      {s:"具身 / 机器人 / 驾驶",all:6.81,cn:8.46,diff:1.65,se:5,nl:16.13,fr:2.38,seN:1,nlN:5,frN:1},
+      {s:"开放世界识别 / 分割",all:6.21,cn:8.32,diff:2.11,se:5,nl:6.45,fr:9.52,seN:1,nlN:2,frN:4},
+      {s:"多模态 / 文档理解",all:6.21,cn:7.17,diff:0.96,se:10,nl:3.23,fr:4.76,seN:2,nlN:1,frN:2},
+      {s:"VLM / 基础模型",all:5.89,cn:5.14,diff:-0.75,se:5,nl:9.68,fr:4.76,seN:1,nlN:3,frN:2},
+      {s:"识别 / 跟踪 / ReID",all:5.65,cn:5.89,diff:0.24,se:0,nl:0,fr:7.14,seN:0,nlN:0,frN:3},
+      {s:"计算成像 / 医学",all:5.4,cn:4.6,diff:-0.8,se:0,nl:0,fr:4.76,seN:0,nlN:0,frN:2},
+      {s:"底层视觉 / 修复",all:5.4,cn:5.75,diff:0.35,se:0,nl:0,fr:9.52,seN:0,nlN:0,frN:4},
+      {s:"几何 / 定位 / 匹配",all:5.01,cn:3.72,diff:-1.29,se:45,nl:12.9,fr:7.14,seN:9,nlN:4,frN:3},
+      {s:"联邦 / 持续 / 高效",all:4.8,cn:4.87,diff:0.07,se:0,nl:6.45,fr:0,seN:0,nlN:2,frN:0},
+      {s:"三维图形 / 几何表示",all:3.99,cn:3.18,diff:-0.81,se:0,nl:9.68,fr:4.76,seN:0,nlN:3,frN:2},
+      {s:"三维重建 / 配准",all:3.46,cn:3.38,diff:-0.08,se:5,nl:9.68,fr:9.52,seN:1,nlN:3,frN:4},
+      {s:"鲁棒性 / 隐私 / 理论",all:3.11,cn:2.44,diff:-0.67,se:0,nl:3.23,fr:9.52,seN:0,nlN:1,frN:4},
+      {s:"基础模型可解释 / 推理",all:3.03,cn:2.1,diff:-0.93,se:5,nl:3.23,fr:2.38,seN:1,nlN:1,frN:1},
+      {s:"形状恢复 / 相机几何",all:2.96,cn:1.56,diff:-1.4,se:5,nl:3.23,fr:0,seN:1,nlN:1,frN:0}
+    ];
+    const EU_KEYS = ["几何 / 定位 / 匹配","具身 / 机器人 / 驾驶","视频生成 / 数字人","鲁棒性 / 隐私 / 理论","三维重建 / 配准","底层视觉 / 修复","开放世界识别 / 分割","三维图形 / 几何表示","VLM / 基础模型","多模态 / 文档理解"];
+    const WH_UNI = [
+      {k:"华中科技大学 HUST",any:55,led:33},{k:"武汉大学 WHU",any:49,led:17},
+      {k:"中国地质大学（武汉）",any:3,led:1},{k:"华中师范大学",any:3,led:0},
+      {k:"武汉理工大学",any:2,led:2},{k:"华中农业大学",any:2,led:0}
+    ];
+    const WH_GROUPS = [
+      ["Xiang Bai 白翔","HUST","5","1","HUST CV / Media Lab"],
+      ["Xinggang Wang 王兴刚","HUST","4","0","刘文予组 · 多模态生成"],
+      ["Mang Ye 叶芒","WHU","4","0","ReID / 联邦学习"],
+      ["Jiayi Ma 马佳义","WHU","3","0","匹配与融合"],
+      ["Bo Du 杜博","WHU","3","0","遥感 / 弱监督"],
+      ["Yu Zhou 周瑜","HUST","2","0","异常检测"],
+      ["Luxin Yan 颜露新","HUST","2","0","红外与动态几何"],
+      ["Ruixuan Li 李瑞轩","HUST","2","0","少样本 / 多模态"],
+      ["Wenbing Tao 陶文兵","HUST","2","0","检测与跟踪"],
+      ["Nong Sang 桑农","HUST","1","0","Diffusion MoE"],
+      ["Zhiguo Cao 曹治国","HUST","1","0","光学风格渲染"],
+      ["Hao Lu 卢昊","HUST","1","0","虚拟试衣"],
+      ["Yongchao Xu 徐永超","WHU","1","0","时序定位"],
+      ["Yu Wu 吴俣","WHU","1","0","视频扩散"],
+      ["Zhigang Tu 涂志刚","WHU","1","0","音视频生成"],
+      ["Bisheng Yang 杨必胜","WHU","1","0","测绘高斯"],
+      ["Yongjun Zhang 张永军","WHU","1","0","卫星开词汇"],
+      ["Bing Shi / Yi Rong","WUT","2","0","驾驶 VLM；视觉定位"],
+      ["Xiangtian Si","CUG","1","0","3DGS 指称分割"]
+    ];
+
+    function hbars(el, rows, max, cls) {
+      el.innerHTML = rows.map(r => {
+        const w = Math.max(2, 100 * r.v / max);
+        return `<div class="bar-row"><div>${r.k}</div><div class="track"><div class="fill ${cls||""}" style="width:${w}%"></div></div><div class="num">${r.v}</div></div>`;
+      }).join("");
+    }
+    function grouped(el, cats, series, max) {
+      el.innerHTML = cats.map((name, i) => {
+        const tracks = series.map(s => {
+          const w = Math.max(1, 100 * s.data[i] / max);
+          return `<div class="track" style="height:8px;margin:2px 0"><div class="fill ${s.cls}" style="width:${w}%"></div></div>`;
+        }).join("");
+        return `<div class="bar-row"><div>${name}</div><div>${tracks}</div><div></div></div>`;
+      }).join("");
+    }
+    function table(el, headers, rows, numFrom=1) {
+      const th = headers.map((h,i) => `<th class="${i>=numFrom?"num":""}">${h}</th>`).join("");
+      const tr = rows.map(r => `<tr>${r.map((c,i) => `<td class="${i>=numFrom?"num":""}">${c}</td>`).join("")}</tr>`).join("");
+      el.innerHTML = `<thead><tr>${th}</tr></thead><tbody>${tr}</tbody>`;
+    }
+
+    function renderCountry(mode) {
+      const rows = mode === "first" ? FIRST : ANY;
+      document.getElementById("country-title").textContent =
+        mode === "first" ? "第一作者论文数（前 12）" : "至少一名作者来自该国的论文数（前 12）";
+      hbars(document.getElementById("country-bars"), rows, rows[0].v);
+      table(document.getElementById("country-table"),
+        ["国家 / 地区","一作篇数","一作占比","含该国作者","覆盖占比"],
+        FIRST_FULL.map(r => [r.k, r.v, r.pct.toFixed(2)+"%", ANY_MAP[r.k]||"—", ANY_PCT[r.k] ? ANY_PCT[r.k].toFixed(2)+"%" : "—"]).concat([
+          ["其他已映射 + 未映射", "—", "—", "—", "—"]
+        ])
+      );
+    }
+
+    document.querySelectorAll("button.tab").forEach(btn => {
+      btn.addEventListener("click", () => {
+        document.querySelectorAll("button.tab").forEach(b => b.classList.remove("active"));
+        btn.classList.add("active");
+        renderCountry(btn.dataset.mode);
+      });
+    });
+    renderCountry("first");
+
+    grouped(document.getElementById("cn-bars"), TOPICS.map(t => t.s), [
+      {data: TOPICS.map(t => t.all), cls:"g"},
+      {data: TOPICS.map(t => t.cn), cls:""}
+    ], 10);
+    table(document.getElementById("cn-up"), ["方向","大会","中国","差值"],
+      TOPICS.filter(t => t.diff>0.3).sort((a,b)=>b.diff-a.diff).map(t => [t.s, t.all.toFixed(2)+"%", t.cn.toFixed(2)+"%", "+"+t.diff.toFixed(2)]));
+    table(document.getElementById("cn-down"), ["方向","大会","中国","差值"],
+      TOPICS.filter(t => t.diff<-0.3).sort((a,b)=>a.diff-b.diff).map(t => [t.s, t.all.toFixed(2)+"%", t.cn.toFixed(2)+"%", t.diff.toFixed(2)]));
+
+    const euTopics = EU_KEYS.map(k => TOPICS.find(t => t.s === k));
+    grouped(document.getElementById("eu-bars"), EU_KEYS, [
+      {data: euTopics.map(t => t.all), cls:"g"},
+      {data: euTopics.map(t => t.se), cls:"o"},
+      {data: euTopics.map(t => t.nl), cls:"s"},
+      {data: euTopics.map(t => t.fr), cls:""}
+    ], 45);
+    table(document.getElementById("eu-table"), ["方向","大会","瑞典","荷兰","法国"],
+      TOPICS.map(t => [t.s, t.all.toFixed(1)+"%", `${t.se.toFixed(1)}% (${t.seN})`, `${t.nl.toFixed(1)}% (${t.nlN})`, `${t.fr.toFixed(1)}% (${t.frN})`]));
+
+    grouped(document.getElementById("wh-bars"), WH_UNI.map(u => u.k), [
+      {data: WH_UNI.map(u => u.any), cls:"g"},
+      {data: WH_UNI.map(u => u.led), cls:""}
+    ], 55);
+    table(document.getElementById("wh-table"), ["负责人","学校","篇数","Spotlight","方向"], WH_GROUPS, 2);
+  </script>
+</body>
+</html>
