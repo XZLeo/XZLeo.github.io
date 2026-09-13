@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ECCV 2026: Country, Topic, and Group Analysis</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600&family=Source+Serif+4:wght@600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --ink: #1a1a1a;
+      --muted: #5c5c5c;
+      --line: #d8d8d8;
+      --bg: #f7f6f3;
+      --paper: #fff;
+      --accent: #233c8e;
+      --bar: #3d5aab;
+      --bar2: #8a93a8;
+      --bar3: #c45c26;
+      --bar4: #2a7a62;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: "Source Sans 3", sans-serif;
+      line-height: 1.55;
+    }
+    header {
+      border-bottom: 1px solid var(--line);
+      background: var(--paper);
+      padding: 18px 22px;
+    }
+    header .wrap, main, footer { max-width: 1080px; margin: 0 auto; }
+    h1 { font-size: 1.55rem; margin: 0 0 6px; font-family: "Source Serif 4", serif; }
+    h2 { font-size: 1.25rem; margin: 36px 0 10px; font-family: "Source Serif 4", serif; }
+    h3 { font-size: 1.05rem; margin: 22px 0 8px; }
+    p { margin: 0 0 12px; }
+    .muted, .caption { color: var(--muted); font-size: 0.9rem; }
+    .caption { margin: 6px 0 18px; }
+    a { color: var(--accent); }
+    nav a { margin-right: 14px; text-decoration: none; }
+    nav a:hover { text-decoration: underline; }
+    nav .lang { float: right; }
+    main { padding: 22px; }
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+      margin: 16px 0 20px;
+    }
+    .stat {
+      background: var(--paper);
+      border: 1px solid var(--line);
+      padding: 12px 14px;
+    }
+    .stat b { display: block; font-size: 1.45rem; color: var(--accent); }
+    .stat span { font-size: 0.82rem; color: var(--muted); }
+    .note {
+      background: #eef1f8;
+      border-left: 3px solid var(--accent);
+      padding: 10px 14px;
+      margin: 14px 0 22px;
+      font-size: 0.92rem;
+    }
+    .tabs { display: flex; gap: 8px; flex-wrap: wrap; margin: 10px 0 14px; }
+    button.tab {
+      border: 1px solid var(--line);
+      background: var(--paper);
+      color: var(--ink);
+      padding: 6px 12px;
+      cursor: pointer;
+      font: inherit;
+    }
+    button.tab.active { background: var(--accent); color: #fff; border-color: var(--accent); }
+    .bars { display: flex; flex-direction: column; gap: 7px; margin: 8px 0 6px; }
+    .bar-row { display: grid; grid-template-columns: 210px 1fr 56px; gap: 8px; align-items: center; font-size: 0.88rem; }
+    .track { background: #e6e6e6; height: 14px; position: relative; }
+    .fill { height: 100%; background: var(--bar); }
+    .fill.g { background: var(--bar2); }
+    .fill.o { background: var(--bar3); }
+    .fill.s { background: var(--bar4); }
+    table { width: 100%; border-collapse: collapse; font-size: 0.88rem; background: var(--paper); }
+    th, td { border-bottom: 1px solid var(--line); padding: 6px 8px; text-align: left; }
+    th { background: #f0f0ee; font-weight: 600; }
+    td.num, th.num { text-align: right; white-space: nowrap; }
+    tr:nth-child(even) td { background: #fafaf8; }
+    .cols { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .cols3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; }
+    .card { background: var(--paper); border: 1px solid var(--line); padding: 12px 14px; }
+    .legend { display: flex; gap: 14px; flex-wrap: wrap; font-size: 0.82rem; color: var(--muted); margin: 4px 0 10px; }
+    .sw { display: inline-block; width: 12px; height: 12px; margin-right: 5px; vertical-align: -1px; }
+    footer { padding: 24px 22px 40px; color: var(--muted); font-size: 0.82rem; }
+    @media (max-width: 800px) {
+      .stats, .cols, .cols3 { grid-template-columns: 1fr; }
+      .bar-row { grid-template-columns: 1fr; }
+      nav .lang { float: none; display: block; margin-top: 8px; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap">
+      <nav>
+        <a href="index.html">Home</a>
+        <a href="research.html">Research</a>
+        <a href="https://eccv.ecva.net/">ECCV 2026</a>
+        <span class="lang"><a href="eccv2026.html">中文</a> · English</span>
+      </nav>
+      <h1>ECCV 2026: Countries, Topics, and Wuhan Groups</h1>
+      <p class="muted">Malmö, 8–12 September 2026 · Springer LNCS 17001–17078 · 2,834 main-conference papers. Affiliations and topic keywords are from the official virtual site.</p>
+    </div>
+  </header>
+  <main>
+    <div class="stats">
+      <div class="stat"><b>2,834</b><span>Main-conference papers</span></div>
+      <div class="stat"><b>39.9%</b><span>Mainland China first author</span></div>
+      <div class="stat"><b>52.2%</b><span>Any mainland-China author</span></div>
+      <div class="stat"><b>114</b><span>Any Wuhan-university author</span></div>
+    </div>
+    <div class="note">
+      <strong>How papers are counted.</strong> First-author country uses the first author’s first affiliation (about 9% of institutions could not be mapped reliably). “Any author” counts a paper if at least one author is affiliated with that country; a paper can count for several countries. Hong Kong, Macao, and Taiwan are listed separately from mainland China.
+    </div>
+
+    <h2>Country share</h2>
+    <p>Mainland China has 1,132 first-author papers (39.9%), 2.7× the United States (424, 15.0%). Greater China is 46.5% of first-author papers and 56.4% of papers with at least one Greater China author. South Korea is third by first author (9.2%).</p>
+    <div class="tabs">
+      <button class="tab active" data-mode="first" type="button">First-author country</button>
+      <button class="tab" data-mode="any" type="button">Any author from country</button>
+    </div>
+    <h3 id="country-title">First-author papers (top 12)</h3>
+    <div id="country-bars" class="bars"></div>
+    <p class="caption">Horizontal axis: paper count. Source: ECCV 2026 virtual site · first-author mapping coverage 91%.</p>
+    <div style="overflow:auto">
+      <table id="country-table"></table>
+    </div>
+
+    <h2>China’s topic mix vs the conference</h2>
+    <p>Across the 18 official first-keyword areas, mainland China’s mix is close to the conference overall. Recognition / segmentation, embodied AI, and generation are slightly higher; classical geometry and theory are slightly lower. All gaps are 1–2 percentage points.</p>
+    <div class="legend">
+      <span><i class="sw" style="background:var(--bar2)"></i>All papers</span>
+      <span><i class="sw" style="background:var(--bar)"></i>Mainland China</span>
+    </div>
+    <div id="cn-bars" class="bars"></div>
+    <p class="caption">Share of papers in each set. First official keyword. 2,834 papers vs 1,478 with a mainland-China affiliation.</p>
+    <div class="cols">
+      <div>
+        <h3>Over-represented in China</h3>
+        <table id="cn-up"></table>
+      </div>
+      <div>
+        <h3>Under-represented in China</h3>
+        <table id="cn-down"></table>
+      </div>
+    </div>
+
+    <h2>Sweden, Netherlands, France</h2>
+    <p>Host-country Sweden has only 11 first-author papers (0.4%). Sample sizes are small, so percentages are structural signals: Sweden is half geometry, the Netherlands leans embodied and 3D, France leans generation and theory.</p>
+    <div class="stats" style="grid-template-columns:repeat(3,1fr)">
+      <div class="stat"><b>20</b><span>Sweden · 11 first-author · KTH / LiU / Lund / Chalmers</span></div>
+      <div class="stat"><b>31</b><span>Netherlands · 14 first-author · Amsterdam / Delft</span></div>
+      <div class="stat"><b>42</b><span>France · 17 first-author · Inria / IP Paris / Valeo</span></div>
+    </div>
+    <div class="legend">
+      <span><i class="sw" style="background:var(--bar2)"></i>Conference</span>
+      <span><i class="sw" style="background:var(--bar3)"></i>Sweden</span>
+      <span><i class="sw" style="background:var(--bar4)"></i>Netherlands</span>
+      <span><i class="sw" style="background:var(--bar)"></i>France</span>
+    </div>
+    <div id="eu-bars" class="bars"></div>
+    <p class="caption">Ten areas with the largest deviations. Swedish geometry is +40 pp versus the conference — the opposite of China’s slight under-index on geometry.</p>
+    <div class="cols3">
+      <div class="card"><h3>Sweden: half geometry</h3><p class="muted">9 of 20 papers are geometry / localization / matching (45% vs 5% conference-wide): RoMa v2, LoMa, SynFlow, PolyLayout. Generation and embodied AI are almost absent.</p></div>
+      <div class="card"><h3>Netherlands: embodied + 3D</h3><p class="muted">Embodied / driving is 16.1% (conference 6.8%). Amsterdam leans models and VLMs; Delft leans matching and driving. Video understanding is low.</p></div>
+      <div class="card"><h3>France: generation and theory</h3><p class="muted">Video generation 14.3%. Robustness / theory, registration, segmentation, and low-level restoration are each about 10%. Only one embodied paper.</p></div>
+    </div>
+    <h3>All 18 areas</h3>
+    <div style="overflow:auto"><table id="eu-table"></table></div>
+
+    <h2>Uncertainty / conformal / calibration</h2>
+    <p>There is no official uncertainty area. Titles that name UQ, conformal prediction, evidential methods, or confidence calibration are about 1.0% of the conference. “Uncertainty” in the abstract is 3.5%. Conformal prediction appears in only three papers.</p>
+    <div class="stats">
+      <div class="stat"><b>29</b><span>Named in the title · 1.0%</span></div>
+      <div class="stat"><b>100</b><span>Uncertainty in the abstract · 3.5%</span></div>
+      <div class="stat"><b>3</b><span>Conformal prediction · 0.11%</span></div>
+      <div class="stat"><b>12</b><span>Strict confidence calibration · 0.4%</span></div>
+    </div>
+    <div class="note"><strong>Calibration is easy to over-count.</strong> Most abstract hits for “calibrat*” are camera calibration, uncalibrated images, or attention recalibration. Tightening to temperature scaling / ECE / confidence or logit calibration leaves 12 papers.</div>
+    <table>
+      <thead><tr><th>Paper</th><th>Tag</th></tr></thead>
+      <tbody>
+        <tr><td>Coordinate Singularities Break Conformal Coverage for Gaze and Head Pose</td><td>conformal</td></tr>
+        <tr><td>SPARC: Single-Pass Scaling for Motion Forecasting with Conformal Bayesian Last Layers</td><td>conformal · Bayesian</td></tr>
+        <tr><td>Ice Cloud Geometry Retrieval with Calibrated Uncertainty from Passive Satellite Imagery</td><td>conformal · UQ</td></tr>
+        <tr><td>Quantile-Adaptive Temperature Scaling for Confidence Calibration</td><td>confidence calibration</td></tr>
+        <tr><td>FedLAS: Feature-Modulated Bidirectional Label Smoothing for Neural Network Calibration</td><td>calibration</td></tr>
+        <tr><td>Rethinking Detection Calibration: A Coordinate Perspective</td><td>detection calibration</td></tr>
+        <tr><td>MED-LCDS: Multi-Expert-Domain CLIP Classification via Logit Calibration</td><td>calibration</td></tr>
+        <tr><td>Mode-Conditioned Residual Calibration for Multi-Object Tracking</td><td>tracking calibration</td></tr>
+        <tr><td>Auto3R: Automated 3D Reconstruction and Scanning via Data-driven Uncertainty Quantification</td><td>UQ</td></tr>
+        <tr><td>Bayesian Uncertainty Attribution-Guided Fine-Tuning for Open-Set Action Recognition</td><td>Bayesian UQ</td></tr>
+        <tr><td>Analytic Bayesian Uncertainty for LiDAR Segmentation: A Single-pass Generative Approach</td><td>Bayesian UQ</td></tr>
+        <tr><td>FuDU: A Fuzzy Dual-dimension Uncertainty Framework for Streaming Active Learning in Industrial Defect Detection</td><td>UQ</td></tr>
+        <tr><td>Uncertainty-aware tree height change regression</td><td>UQ</td></tr>
+        <tr><td>UECP: Uncertainty-Enhanced Collaborative Perception</td><td>UQ</td></tr>
+        <tr><td>NegROI: Click-Centric Uncertainty-Guided Refinement with Scene-Conditioned Negative Prompts for Robust Interactive 3D Segmentation</td><td>UQ</td></tr>
+        <tr><td>Cross-View Yaw Estimation in Location Uncertainty with Line-Aligning Yaw Scoring</td><td>UQ</td></tr>
+        <tr><td>Robustness Meets Uncertainty: Evidential Adversarial Training for Robust Selective Classification</td><td>evidential</td></tr>
+        <tr><td>ELDiff: When Evidential Learning Meets Text-to-Image Diffusion</td><td>evidential</td></tr>
+        <tr><td>HERO: Heterogeneous Evidential Robust Object-Level Collaborative Perception</td><td>evidential</td></tr>
+        <tr><td>Semantic-Anchored Evidential Fusion for Domain-Robust Whole-Slide Survival Analysis</td><td>evidential</td></tr>
+        <tr><td>Predictive Photometric Uncertainty in Gaussian Splatting for Novel View Synthesis</td><td>UQ</td></tr>
+        <tr><td>PUF: Plug-and-Play Uncertainty-Aware Fusion for Online 3D Scene Graph Generation</td><td>UQ</td></tr>
+        <tr><td>Uncertainty-Driven Gaussian Sphere Propagation for 3D Semantic Segmentation</td><td>UQ</td></tr>
+        <tr><td>RIGS: Radar-Informed Gaussian Splatting for Uncertainty-Aware 3D Occupancy and Motion Prediction</td><td>UQ</td></tr>
+        <tr><td>Training-free Uncertainty Guidance for Complex Visual Tasks with MLLMs</td><td>UQ</td></tr>
+        <tr><td>GeMoE: Gating Entropy is All You Need for Uncertainty-aware Adaptive Routing in MoE-based Large Vision-Language Models</td><td>UQ</td></tr>
+        <tr><td>Multi-Channel Uncertainty-Weighted Score Matching for Conditional Diffusion in Medical UDA</td><td>UQ</td></tr>
+        <tr><td>Distribution-Alignment Bridge for Uncertainty-Aware Text-to-Video Retrieval</td><td>UQ</td></tr>
+        <tr><td>Combining Discrepancy-Confusion Uncertainty and Calibration Diversity for Active Fine-Grained Image Classification</td><td>UQ · calibration</td></tr>
+      </tbody>
+    </table>
+    <p class="caption">Relative to video generation (8.7%) or 3DGS (8.0%), UQ is still a small theme. Uncertainty is more often a module inside reconstruction, driving, or medical tasks than a standalone theory track.</p>
+
+    <h2>Wuhan university groups</h2>
+    <p>114 papers have at least one Wuhan-university author (4.0%). 53 are last-authored by Wuhan faculty. No orals; five spotlights. HUST and Wuhan University dominate.</p>
+    <div class="stats">
+      <div class="stat"><b>114</b><span>Any Wuhan affiliation</span></div>
+      <div class="stat"><b>53</b><span>Last-authored by Wuhan faculty</span></div>
+      <div class="stat"><b>35</b><span>Last-author groups</span></div>
+      <div class="stat"><b>5</b><span>Spotlights</span></div>
+    </div>
+    <div class="legend">
+      <span><i class="sw" style="background:var(--bar2)"></i>Any author from the university</span>
+      <span><i class="sw" style="background:var(--bar)"></i>Last-authored by that university’s faculty</span>
+    </div>
+    <div id="wh-bars" class="bars"></div>
+    <h3>Last author is Wuhan faculty (by paper count)</h3>
+    <table id="wh-table"></table>
+    <p class="muted">Groups are merged by last author. Collaborative papers whose last author is not in Wuhan count only in the 114-paper participation set.</p>
+  </main>
+  <footer>
+    Analysis date 13 September 2026 · Data:
+    <a href="https://eccv.ecva.net/virtual/2026/papers.html">ECCV 2026 virtual site</a>,
+    <a href="https://eccv.ecva.net/Conferences/2026/AcceptedPapers">Accepted Papers</a>.
+    Static interactive page for GitHub Pages.
+    Homepage: <a href="https://xzleo.github.io">xzleo.github.io</a>
+    · <a href="eccv2026.html">中文版</a>
+  </footer>
+  <script>
+    const FIRST = [
+      {k:"Mainland China",v:1132,pct:39.94},{k:"United States",v:424,pct:14.96},{k:"South Korea",v:260,pct:9.17},{k:"Hong Kong",v:152,pct:5.36},
+      {k:"Germany",v:101,pct:3.56},{k:"United Kingdom",v:75,pct:2.65},{k:"Singapore",v:60,pct:2.12},{k:"Australia",v:53,pct:1.87},
+      {k:"Japan",v:44,pct:1.55},{k:"Switzerland",v:35,pct:1.24},{k:"Canada",v:31,pct:1.09},{k:"India",v:26,pct:0.92}
+    ];
+    const FIRST_FULL = [
+      ...FIRST,
+      {k:"Taiwan",v:23,pct:0.81},{k:"Italy",v:22,pct:0.78},{k:"UAE",v:19,pct:0.67},
+      {k:"France",v:17,pct:0.60},{k:"Israel",v:16,pct:0.56},{k:"Netherlands",v:14,pct:0.49},{k:"Sweden",v:11,pct:0.39}
+    ];
+    const ANY = [
+      {k:"Mainland China",v:1478,pct:52.15},{k:"United States",v:838,pct:29.57},{k:"Hong Kong",v:357,pct:12.6},{k:"South Korea",v:316,pct:11.15},
+      {k:"Singapore",v:210,pct:7.41},{k:"United Kingdom",v:177,pct:6.25},{k:"Germany",v:173,pct:6.1},{k:"Australia",v:141,pct:4.98},
+      {k:"Japan",v:87,pct:3.07},{k:"Switzerland",v:68,pct:2.4},{k:"Canada",v:56,pct:1.98},{k:"UAE",v:44,pct:1.55}
+    ];
+    const ANY_MAP = {
+      "Mainland China":1478,"United States":838,"South Korea":316,"Hong Kong":357,"Germany":173,"United Kingdom":177,"Singapore":210,"Australia":141,
+      "Japan":87,"Switzerland":68,"Canada":56,"India":39,"Taiwan":39,"Italy":43,"UAE":44,"France":42,"Netherlands":31,"Sweden":20,"Israel":23
+    };
+    const ANY_PCT = {
+      "Mainland China":52.15,"United States":29.57,"South Korea":11.15,"Hong Kong":12.6,"Germany":6.1,"United Kingdom":6.25,"Singapore":7.41,"Australia":4.98,
+      "Japan":3.07,"Switzerland":2.4,"Canada":1.98,"India":1.38,"Taiwan":1.38,"Italy":1.52,"UAE":1.55,"France":1.48,"Netherlands":1.09,"Sweden":0.71,"Israel":0.81
+    };
+    const TOPICS = [
+      {s:"Video generation / avatars",all:8.68,cn:8.46,diff:-0.22,se:5,nl:9.68,fr:14.29,seN:1,nlN:3,frN:6},
+      {s:"Video understanding / multimodal",all:8.36,cn:9.34,diff:0.98,se:0,nl:3.23,fr:4.76,seN:0,nlN:1,frN:2},
+      {s:"3DGS / neural rendering",all:7.97,cn:7.31,diff:-0.66,se:5,nl:3.23,fr:4.76,seN:1,nlN:1,frN:2},
+      {s:"Image generation / diffusion",all:7.06,cn:8.32,diff:1.26,se:5,nl:0,fr:0,seN:1,nlN:0,frN:0},
+      {s:"Embodied / robotics / driving",all:6.81,cn:8.46,diff:1.65,se:5,nl:16.13,fr:2.38,seN:1,nlN:5,frN:1},
+      {s:"Open-world recognition / seg.",all:6.21,cn:8.32,diff:2.11,se:5,nl:6.45,fr:9.52,seN:1,nlN:2,frN:4},
+      {s:"Multimodal / document understanding",all:6.21,cn:7.17,diff:0.96,se:10,nl:3.23,fr:4.76,seN:2,nlN:1,frN:2},
+      {s:"VLM / foundation models",all:5.89,cn:5.14,diff:-0.75,se:5,nl:9.68,fr:4.76,seN:1,nlN:3,frN:2},
+      {s:"Recognition / tracking / ReID",all:5.65,cn:5.89,diff:0.24,se:0,nl:0,fr:7.14,seN:0,nlN:0,frN:3},
+      {s:"Computational imaging / medical",all:5.4,cn:4.6,diff:-0.8,se:0,nl:0,fr:4.76,seN:0,nlN:0,frN:2},
+      {s:"Low-level vision / restoration",all:5.4,cn:5.75,diff:0.35,se:0,nl:0,fr:9.52,seN:0,nlN:0,frN:4},
+      {s:"Geometry / localization / matching",all:5.01,cn:3.72,diff:-1.29,se:45,nl:12.9,fr:7.14,seN:9,nlN:4,frN:3},
+      {s:"Federated / continual / efficient",all:4.8,cn:4.87,diff:0.07,se:0,nl:6.45,fr:0,seN:0,nlN:2,frN:0},
+      {s:"3D graphics / representations",all:3.99,cn:3.18,diff:-0.81,se:0,nl:9.68,fr:4.76,seN:0,nlN:3,frN:2},
+      {s:"3D reconstruction / registration",all:3.46,cn:3.38,diff:-0.08,se:5,nl:9.68,fr:9.52,seN:1,nlN:3,frN:4},
+      {s:"Robustness / privacy / theory",all:3.11,cn:2.44,diff:-0.67,se:0,nl:3.23,fr:9.52,seN:0,nlN:1,frN:4},
+      {s:"Foundation-model interpretability",all:3.03,cn:2.1,diff:-0.93,se:5,nl:3.23,fr:2.38,seN:1,nlN:1,frN:1},
+      {s:"Shape recovery / camera geometry",all:2.96,cn:1.56,diff:-1.4,se:5,nl:3.23,fr:0,seN:1,nlN:1,frN:0}
+    ];
+    const EU_KEYS = [
+      "Geometry / localization / matching","Embodied / robotics / driving","Video generation / avatars",
+      "Robustness / privacy / theory","3D reconstruction / registration","Low-level vision / restoration",
+      "Open-world recognition / seg.","3D graphics / representations","VLM / foundation models",
+      "Multimodal / document understanding"
+    ];
+    const WH_UNI = [
+      {k:"HUST",any:55,led:33},{k:"Wuhan University",any:49,led:17},
+      {k:"CUG Wuhan",any:3,led:1},{k:"CCNU",any:3,led:0},
+      {k:"Wuhan Univ. of Technology",any:2,led:2},{k:"Huazhong Agricultural Univ.",any:2,led:0}
+    ];
+    const WH_GROUPS = [
+      ["Xiang Bai","HUST","5","1","HUST CV / Media Lab"],
+      ["Xinggang Wang","HUST","4","0","Liu Wenyu group · multimodal generation"],
+      ["Mang Ye","WHU","4","0","ReID / federated learning"],
+      ["Jiayi Ma","WHU","3","0","Matching and fusion"],
+      ["Bo Du","WHU","3","0","Remote sensing / weak supervision"],
+      ["Yu Zhou","HUST","2","0","Anomaly detection"],
+      ["Luxin Yan","HUST","2","0","Infrared and dynamic geometry"],
+      ["Ruixuan Li","HUST","2","0","Few-shot / multimodal"],
+      ["Wenbing Tao","HUST","2","0","Detection and tracking"],
+      ["Nong Sang","HUST","1","0","Diffusion MoE"],
+      ["Zhiguo Cao","HUST","1","0","Optical style rendering"],
+      ["Hao Lu","HUST","1","0","Virtual try-on"],
+      ["Yongchao Xu","WHU","1","0","Temporal localization"],
+      ["Yu Wu","WHU","1","0","Video diffusion"],
+      ["Zhigang Tu","WHU","1","0","Audio–video generation"],
+      ["Bisheng Yang","WHU","1","0","Surveying Gaussians"],
+      ["Yongjun Zhang","WHU","1","0","Satellite open-vocabulary"],
+      ["Bing Shi / Yi Rong","WUT","2","0","Driving VLM; visual localization"],
+      ["Xiangtian Si","CUG","1","0","3DGS referring segmentation"]
+    ];
+
+    function hbars(el, rows, max, cls) {
+      el.innerHTML = rows.map(r => {
+        const w = Math.max(2, 100 * r.v / max);
+        return `<div class="bar-row"><div>${r.k}</div><div class="track"><div class="fill ${cls||""}" style="width:${w}%"></div></div><div class="num">${r.v}</div></div>`;
+      }).join("");
+    }
+    function grouped(el, cats, series, max) {
+      el.innerHTML = cats.map((name, i) => {
+        const tracks = series.map(s => {
+          const w = Math.max(1, 100 * s.data[i] / max);
+          return `<div class="track" style="height:8px;margin:2px 0"><div class="fill ${s.cls}" style="width:${w}%"></div></div>`;
+        }).join("");
+        return `<div class="bar-row"><div>${name}</div><div>${tracks}</div><div></div></div>`;
+      }).join("");
+    }
+    function table(el, headers, rows, numFrom=1) {
+      const th = headers.map((h,i) => `<th class="${i>=numFrom?"num":""}">${h}</th>`).join("");
+      const tr = rows.map(r => `<tr>${r.map((c,i) => `<td class="${i>=numFrom?"num":""}">${c}</td>`).join("")}</tr>`).join("");
+      el.innerHTML = `<thead><tr>${th}</tr></thead><tbody>${tr}</tbody>`;
+    }
+
+    function renderCountry(mode) {
+      const rows = mode === "first" ? FIRST : ANY;
+      document.getElementById("country-title").textContent =
+        mode === "first" ? "First-author papers (top 12)" : "Papers with at least one author from the country (top 12)";
+      hbars(document.getElementById("country-bars"), rows, rows[0].v);
+      table(document.getElementById("country-table"),
+        ["Country / region","First-author papers","First-author share","Any-author papers","Any-author share"],
+        FIRST_FULL.map(r => [r.k, r.v, r.pct.toFixed(2)+"%", ANY_MAP[r.k]||"—", ANY_PCT[r.k] ? ANY_PCT[r.k].toFixed(2)+"%" : "—"]).concat([
+          ["Other mapped + unmapped", "—", "—", "—", "—"]
+        ])
+      );
+    }
+
+    document.querySelectorAll("button.tab").forEach(btn => {
+      btn.addEventListener("click", () => {
+        document.querySelectorAll("button.tab").forEach(b => b.classList.remove("active"));
+        btn.classList.add("active");
+        renderCountry(btn.dataset.mode);
+      });
+    });
+    renderCountry("first");
+
+    grouped(document.getElementById("cn-bars"), TOPICS.map(t => t.s), [
+      {data: TOPICS.map(t => t.all), cls:"g"},
+      {data: TOPICS.map(t => t.cn), cls:""}
+    ], 10);
+    table(document.getElementById("cn-up"), ["Area","Conference","China","Gap"],
+      TOPICS.filter(t => t.diff>0.3).sort((a,b)=>b.diff-a.diff).map(t => [t.s, t.all.toFixed(2)+"%", t.cn.toFixed(2)+"%", "+"+t.diff.toFixed(2)]));
+    table(document.getElementById("cn-down"), ["Area","Conference","China","Gap"],
+      TOPICS.filter(t => t.diff<-0.3).sort((a,b)=>a.diff-b.diff).map(t => [t.s, t.all.toFixed(2)+"%", t.cn.toFixed(2)+"%", t.diff.toFixed(2)]));
+
+    const euTopics = EU_KEYS.map(k => TOPICS.find(t => t.s === k));
+    grouped(document.getElementById("eu-bars"), EU_KEYS, [
+      {data: euTopics.map(t => t.all), cls:"g"},
+      {data: euTopics.map(t => t.se), cls:"o"},
+      {data: euTopics.map(t => t.nl), cls:"s"},
+      {data: euTopics.map(t => t.fr), cls:""}
+    ], 45);
+    table(document.getElementById("eu-table"), ["Area","Conference","Sweden","Netherlands","France"],
+      TOPICS.map(t => [t.s, t.all.toFixed(1)+"%", `${t.se.toFixed(1)}% (${t.seN})`, `${t.nl.toFixed(1)}% (${t.nlN})`, `${t.fr.toFixed(1)}% (${t.frN})`]));
+
+    grouped(document.getElementById("wh-bars"), WH_UNI.map(u => u.k), [
+      {data: WH_UNI.map(u => u.any), cls:"g"},
+      {data: WH_UNI.map(u => u.led), cls:""}
+    ], 55);
+    table(document.getElementById("wh-table"), ["PI","University","Papers","Spotlight","Focus"], WH_GROUPS, 2);
+  </script>
+</body>
+</html>

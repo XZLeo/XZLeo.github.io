@@ -7,7 +7,8 @@ Academic personal homepage deployed via GitHub Pages.
 ## Structure
 
 - `index.html` — About, News, Research overview, Contact
-- `eccv2026.html` — Interactive ECCV 2026 country / topic / Wuhan-group analysis
+- `eccv2026.html` — Interactive ECCV 2026 analysis (Chinese)
+- `eccv2026-en.html` — Same report in English
 - `research.html` — Full publication list
 - `teaching.html` — Teaching and mentorship
 - `main.css` — Shared styles (Hongwei Li–style layout)
