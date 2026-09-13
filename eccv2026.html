@@ -91,9 +91,21 @@
     .card { background: var(--paper); border: 1px solid var(--line); padding: 12px 14px; }
     .legend { display: flex; gap: 14px; flex-wrap: wrap; font-size: 0.82rem; color: var(--muted); margin: 4px 0 10px; }
     .sw { display: inline-block; width: 12px; height: 12px; margin-right: 5px; vertical-align: -1px; }
+    .pie-box {
+      display: grid;
+      grid-template-columns: 260px 1fr;
+      gap: 20px;
+      align-items: center;
+      background: var(--paper);
+      border: 1px solid var(--line);
+      padding: 16px 18px;
+      margin: 12px 0 20px;
+    }
+    .pie-legend-row { display: grid; grid-template-columns: 14px 1fr auto auto; gap: 8px; align-items: center; font-size: 0.88rem; margin: 5px 0; }
+    .pie-legend-row b { font-weight: 600; }
     footer { padding: 24px 22px 40px; color: var(--muted); font-size: 0.82rem; }
     @media (max-width: 800px) {
-      .stats, .cols, .cols3 { grid-template-columns: 1fr; }
+      .stats, .cols, .cols3, .pie-box { grid-template-columns: 1fr; }
       .bar-row { grid-template-columns: 1fr; }
     }
   </style>
@@ -186,38 +198,44 @@
       <div class="stat"><b>12</b><span>严格置信度校准 · 0.4%</span></div>
     </div>
     <div class="note"><strong>calibration 容易误计。</strong>摘要里的 calibrat 大多是相机标定或 attention recalibration。按 temperature scaling / ECE / confidence calibration 收紧后剩 12 篇。</div>
+    <h3>29 篇按应用主题</h3>
+    <p class="muted">互斥归类，按官方第一关键词合并。MED-LCDS 计入识别/分类，GeMoE 计入 VLM。分母 29 篇。</p>
+    <div class="pie-box">
+      <svg id="uq-pie" viewBox="0 0 220 220" width="220" height="220" aria-label="UQ papers by theme"></svg>
+      <div id="uq-pie-legend"></div>
+    </div>
     <table>
-      <thead><tr><th>论文</th><th>标签</th></tr></thead>
+      <thead><tr><th>论文</th><th>主题</th><th>标签</th></tr></thead>
       <tbody>
-        <tr><td>Coordinate Singularities Break Conformal Coverage for Gaze and Head Pose</td><td>conformal</td></tr>
-        <tr><td>SPARC: Single-Pass Scaling for Motion Forecasting with Conformal Bayesian Last Layers</td><td>conformal · Bayesian</td></tr>
-        <tr><td>Ice Cloud Geometry Retrieval with Calibrated Uncertainty from Passive Satellite Imagery</td><td>conformal · UQ</td></tr>
-        <tr><td>Quantile-Adaptive Temperature Scaling for Confidence Calibration</td><td>confidence calibration</td></tr>
-        <tr><td>FedLAS: Feature-Modulated Bidirectional Label Smoothing for Neural Network Calibration</td><td>校准</td></tr>
-        <tr><td>Rethinking Detection Calibration: A Coordinate Perspective</td><td>检测校准</td></tr>
-        <tr><td>MED-LCDS: Multi-Expert-Domain CLIP Classification via Logit Calibration</td><td>校准</td></tr>
-        <tr><td>Mode-Conditioned Residual Calibration for Multi-Object Tracking</td><td>跟踪校准</td></tr>
-        <tr><td>Auto3R: Automated 3D Reconstruction and Scanning via Data-driven Uncertainty Quantification</td><td>UQ</td></tr>
-        <tr><td>Bayesian Uncertainty Attribution-Guided Fine-Tuning for Open-Set Action Recognition</td><td>Bayesian UQ</td></tr>
-        <tr><td>Analytic Bayesian Uncertainty for LiDAR Segmentation: A Single-pass Generative Approach</td><td>Bayesian UQ</td></tr>
-        <tr><td>FuDU: A Fuzzy Dual-dimension Uncertainty Framework for Streaming Active Learning in Industrial Defect Detection</td><td>UQ</td></tr>
-        <tr><td>Uncertainty-aware tree height change regression</td><td>UQ</td></tr>
-        <tr><td>UECP: Uncertainty-Enhanced Collaborative Perception</td><td>UQ</td></tr>
-        <tr><td>NegROI: Click-Centric Uncertainty-Guided Refinement with Scene-Conditioned Negative Prompts for Robust Interactive 3D Segmentation</td><td>UQ</td></tr>
-        <tr><td>Cross-View Yaw Estimation in Location Uncertainty with Line-Aligning Yaw Scoring</td><td>UQ</td></tr>
-        <tr><td>Robustness Meets Uncertainty: Evidential Adversarial Training for Robust Selective Classification</td><td>evidential</td></tr>
-        <tr><td>ELDiff: When Evidential Learning Meets Text-to-Image Diffusion</td><td>evidential</td></tr>
-        <tr><td>HERO: Heterogeneous Evidential Robust Object-Level Collaborative Perception</td><td>evidential</td></tr>
-        <tr><td>Semantic-Anchored Evidential Fusion for Domain-Robust Whole-Slide Survival Analysis</td><td>evidential</td></tr>
-        <tr><td>Predictive Photometric Uncertainty in Gaussian Splatting for Novel View Synthesis</td><td>UQ</td></tr>
-        <tr><td>PUF: Plug-and-Play Uncertainty-Aware Fusion for Online 3D Scene Graph Generation</td><td>UQ</td></tr>
-        <tr><td>Uncertainty-Driven Gaussian Sphere Propagation for 3D Semantic Segmentation</td><td>UQ</td></tr>
-        <tr><td>RIGS: Radar-Informed Gaussian Splatting for Uncertainty-Aware 3D Occupancy and Motion Prediction</td><td>UQ</td></tr>
-        <tr><td>Training-free Uncertainty Guidance for Complex Visual Tasks with MLLMs</td><td>UQ</td></tr>
-        <tr><td>GeMoE: Gating Entropy is All You Need for Uncertainty-aware Adaptive Routing in MoE-based Large Vision-Language Models</td><td>UQ</td></tr>
-        <tr><td>Multi-Channel Uncertainty-Weighted Score Matching for Conditional Diffusion in Medical UDA</td><td>UQ</td></tr>
-        <tr><td>Distribution-Alignment Bridge for Uncertainty-Aware Text-to-Video Retrieval</td><td>UQ</td></tr>
-        <tr><td>Combining Discrepancy-Confusion Uncertainty and Calibration Diversity for Active Fine-Grained Image Classification</td><td>UQ · 校准</td></tr>
+        <tr><td>Coordinate Singularities Break Conformal Coverage for Gaze and Head Pose</td><td>几何 / 位姿 / 匹配</td><td>conformal</td></tr>
+        <tr><td>SPARC: Single-Pass Scaling for Motion Forecasting with Conformal Bayesian Last Layers</td><td>几何 / 位姿 / 匹配</td><td>conformal · Bayesian</td></tr>
+        <tr><td>Ice Cloud Geometry Retrieval with Calibrated Uncertainty from Passive Satellite Imagery</td><td>医学 / 科学成像</td><td>conformal · UQ</td></tr>
+        <tr><td>Quantile-Adaptive Temperature Scaling for Confidence Calibration</td><td>医学 / 科学成像</td><td>confidence calibration</td></tr>
+        <tr><td>FedLAS: Feature-Modulated Bidirectional Label Smoothing for Neural Network Calibration</td><td>医学 / 科学成像</td><td>校准</td></tr>
+        <tr><td>Rethinking Detection Calibration: A Coordinate Perspective</td><td>几何 / 位姿 / 匹配</td><td>检测校准</td></tr>
+        <tr><td>MED-LCDS: Multi-Expert-Domain CLIP Classification via Logit Calibration</td><td>识别 / 跟踪 / 开放世界</td><td>校准</td></tr>
+        <tr><td>Mode-Conditioned Residual Calibration for Multi-Object Tracking</td><td>识别 / 跟踪 / 开放世界</td><td>跟踪校准</td></tr>
+        <tr><td>Auto3R: Automated 3D Reconstruction and Scanning via Data-driven Uncertainty Quantification</td><td>几何 / 位姿 / 匹配</td><td>UQ</td></tr>
+        <tr><td>Bayesian Uncertainty Attribution-Guided Fine-Tuning for Open-Set Action Recognition</td><td>识别 / 跟踪 / 开放世界</td><td>Bayesian UQ</td></tr>
+        <tr><td>Analytic Bayesian Uncertainty for LiDAR Segmentation: A Single-pass Generative Approach</td><td>几何 / 位姿 / 匹配</td><td>Bayesian UQ</td></tr>
+        <tr><td>FuDU: A Fuzzy Dual-dimension Uncertainty Framework for Streaming Active Learning in Industrial Defect Detection</td><td>识别 / 跟踪 / 开放世界</td><td>UQ</td></tr>
+        <tr><td>Uncertainty-aware tree height change regression</td><td>识别 / 跟踪 / 开放世界</td><td>UQ</td></tr>
+        <tr><td>UECP: Uncertainty-Enhanced Collaborative Perception</td><td>具身 / 驾驶 / 鲁棒性</td><td>UQ</td></tr>
+        <tr><td>NegROI: Click-Centric Uncertainty-Guided Refinement with Scene-Conditioned Negative Prompts for Robust Interactive 3D Segmentation</td><td>识别 / 跟踪 / 开放世界</td><td>UQ</td></tr>
+        <tr><td>Cross-View Yaw Estimation in Location Uncertainty with Line-Aligning Yaw Scoring</td><td>几何 / 位姿 / 匹配</td><td>UQ</td></tr>
+        <tr><td>Robustness Meets Uncertainty: Evidential Adversarial Training for Robust Selective Classification</td><td>具身 / 驾驶 / 鲁棒性</td><td>evidential</td></tr>
+        <tr><td>ELDiff: When Evidential Learning Meets Text-to-Image Diffusion</td><td>生成 / VLM / 多模态</td><td>evidential</td></tr>
+        <tr><td>HERO: Heterogeneous Evidential Robust Object-Level Collaborative Perception</td><td>具身 / 驾驶 / 鲁棒性</td><td>evidential</td></tr>
+        <tr><td>Semantic-Anchored Evidential Fusion for Domain-Robust Whole-Slide Survival Analysis</td><td>医学 / 科学成像</td><td>evidential</td></tr>
+        <tr><td>Predictive Photometric Uncertainty in Gaussian Splatting for Novel View Synthesis</td><td>三维重建 / 3DGS</td><td>UQ</td></tr>
+        <tr><td>PUF: Plug-and-Play Uncertainty-Aware Fusion for Online 3D Scene Graph Generation</td><td>三维重建 / 3DGS</td><td>UQ</td></tr>
+        <tr><td>Uncertainty-Driven Gaussian Sphere Propagation for 3D Semantic Segmentation</td><td>三维重建 / 3DGS</td><td>UQ</td></tr>
+        <tr><td>RIGS: Radar-Informed Gaussian Splatting for Uncertainty-Aware 3D Occupancy and Motion Prediction</td><td>医学 / 科学成像</td><td>UQ</td></tr>
+        <tr><td>Training-free Uncertainty Guidance for Complex Visual Tasks with MLLMs</td><td>生成 / VLM / 多模态</td><td>UQ</td></tr>
+        <tr><td>GeMoE: Gating Entropy is All You Need for Uncertainty-aware Adaptive Routing in MoE-based Large Vision-Language Models</td><td>生成 / VLM / 多模态</td><td>UQ</td></tr>
+        <tr><td>Multi-Channel Uncertainty-Weighted Score Matching for Conditional Diffusion in Medical UDA</td><td>医学 / 科学成像</td><td>UQ</td></tr>
+        <tr><td>Distribution-Alignment Bridge for Uncertainty-Aware Text-to-Video Retrieval</td><td>生成 / VLM / 多模态</td><td>UQ</td></tr>
+        <tr><td>Combining Discrepancy-Confusion Uncertainty and Calibration Diversity for Active Fine-Grained Image Classification</td><td>几何 / 位姿 / 匹配</td><td>UQ · 校准</td></tr>
       </tbody>
     </table>
     <p class="caption">相对视频生成（8.7%）或 3DGS（8.0%），UQ 仍是小方向；uncertainty 多作为重建、驾驶、医学任务的模块出现。</p>
@@ -383,6 +401,38 @@
       {data: WH_UNI.map(u => u.led), cls:""}
     ], 55);
     table(document.getElementById("wh-table"), ["负责人","学校","篇数","Spotlight","方向"], WH_GROUPS, 2);
+
+    const UQ_THEMES = [
+      {k:"几何 / 位姿 / 匹配", v:7, c:"#233c8e"},
+      {k:"医学 / 科学成像", v:6, c:"#c45c26"},
+      {k:"识别 / 跟踪 / 开放世界", v:6, c:"#2a7a62"},
+      {k:"生成 / VLM / 多模态", v:4, c:"#6b4c9a"},
+      {k:"三维重建 / 3DGS", v:3, c:"#3d5aab"},
+      {k:"具身 / 驾驶 / 鲁棒性", v:3, c:"#8a93a8"}
+    ];
+    (function drawUqPie() {
+      const svg = document.getElementById("uq-pie");
+      const legend = document.getElementById("uq-pie-legend");
+      if (!svg || !legend) return;
+      const total = UQ_THEMES.reduce((s, t) => s + t.v, 0);
+      const cx = 110, cy = 110, r = 96;
+      function polar(a) {
+        const rad = (a - 90) * Math.PI / 180;
+        return [cx + r * Math.cos(rad), cy + r * Math.sin(rad)];
+      }
+      let angle = 0;
+      svg.innerHTML = UQ_THEMES.map(t => {
+        const start = angle;
+        angle += 360 * t.v / total;
+        const [x1, y1] = polar(start);
+        const [x2, y2] = polar(angle);
+        const large = angle - start > 180 ? 1 : 0;
+        return `<path d="M ${cx} ${cy} L ${x1} ${y1} A ${r} ${r} 0 ${large} 1 ${x2} ${y2} Z" fill="${t.c}"><title>${t.k}: ${t.v} (${(100*t.v/total).toFixed(1)}%)</title></path>`;
+      }).join("");
+      legend.innerHTML = UQ_THEMES.map(t =>
+        `<div class="pie-legend-row"><i class="sw" style="background:${t.c}"></i><span>${t.k}</span><b>${t.v}</b><span>${(100*t.v/total).toFixed(1)}%</span></div>`
+      ).join("");
+    })();
   </script>
 </body>
 </html>
