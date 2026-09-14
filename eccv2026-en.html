@@ -104,6 +104,21 @@
     }
     .pie-legend-row { display: grid; grid-template-columns: 14px 1fr auto auto; gap: 8px; align-items: center; font-size: 0.88rem; margin: 5px 0; }
     .pie-legend-row b { font-weight: 600; }
+    details.paper-fold {
+      background: var(--paper);
+      border: 1px solid var(--line);
+      margin: 12px 0 18px;
+    }
+    details.paper-fold > summary {
+      cursor: pointer;
+      padding: 10px 14px;
+      font-weight: 600;
+      list-style: none;
+    }
+    details.paper-fold > summary::-webkit-details-marker { display: none; }
+    details.paper-fold > summary::after { content: " ▾"; color: var(--muted); font-weight: 400; }
+    details.paper-fold[open] > summary::after { content: " ▴"; }
+    details.paper-fold table { margin: 0; border: 0; }
     footer { padding: 24px 22px 40px; color: var(--muted); font-size: 0.82rem; }
     @media (max-width: 800px) {
       .stats, .cols, .cols3, .pie-box { grid-template-columns: 1fr; }
@@ -191,24 +206,35 @@
     <h3>All 18 areas</h3>
     <div style="overflow:auto"><table id="eu-table"></table></div>
 
-    <h2>Uncertainty / conformal / calibration</h2>
-    <p>There is no official uncertainty area. Titles that name UQ, conformal prediction, evidential methods, or confidence calibration are about 1.0% of the conference. “Uncertainty” in the abstract is 3.5%. Conformal prediction appears in only three papers.</p>
+    <h2>Uncertainty / conformal / calibration / OOD</h2>
+    <p>There is no official uncertainty area. Titles that name UQ, conformal prediction, confidence calibration, or OOD detection are about 1.3% of the conference. “Uncertainty” in the abstract is 3.5%. Conformal prediction appears in only three papers; OOD detection in nine.</p>
     <div class="stats">
-      <div class="stat"><b>29</b><span>Named in the title · 1.0%</span></div>
-      <div class="stat"><b>100</b><span>Uncertainty in the abstract · 3.5%</span></div>
+      <div class="stat"><b>38</b><span>Named in the title · 1.3%</span></div>
+      <div class="stat"><b>9</b><span>OOD detection · 0.32%</span></div>
       <div class="stat"><b>3</b><span>Conformal prediction · 0.11%</span></div>
       <div class="stat"><b>12</b><span>Strict confidence calibration · 0.4%</span></div>
     </div>
-    <div class="note"><strong>Calibration is easy to over-count.</strong> Most abstract hits for “calibrat*” are camera calibration, uncalibrated images, or attention recalibration. Tightening to temperature scaling / ECE / confidence or logit calibration leaves 12 papers.</div>
-    <h3>29 papers by application theme</h3>
-    <p class="muted">Mutually exclusive groups, merged from the official first keyword. MED-LCDS is counted as recognition / classification; GeMoE as VLM. Denominator: 29 title-explicit papers.</p>
+    <div class="note"><strong>Calibration is easy to over-count; OOD here means detection.</strong> Most abstract hits for “calibrat*” are camera calibration or attention recalibration. OOD counts only titles that name out-of-distribution / OOD detection, not papers that mention OOD merely as a generalization test.</div>
+    <h3>38 papers by application theme</h3>
+    <p class="muted">Mutually exclusive groups. OOD detection is its own slice; the rest merge official first keywords. MED-LCDS is counted as recognition / classification; GeMoE as VLM. Denominator: 38 title-explicit papers.</p>
     <div class="pie-box">
       <svg id="uq-pie" viewBox="0 0 220 220" width="220" height="220" aria-label="UQ papers by theme"></svg>
       <div id="uq-pie-legend"></div>
     </div>
+    <details class="paper-fold">
+      <summary>Show 38-paper list</summary>
     <table>
       <thead><tr><th>Paper</th><th>Theme</th><th>Tag</th></tr></thead>
       <tbody>
+        <tr><td>If It's Not Efficient, It's Not Usable: Real-Time OOD Detection with Latent De-Biasing and High-Quality Negative Samples</td><td>OOD detection</td><td>OOD</td></tr>
+        <tr><td>NegAS: Negative Label Guided Attention and Scoring for Out-of-Distribution Object Detection with Vision-Language Models</td><td>OOD detection</td><td>OOD</td></tr>
+        <tr><td>Leveraging Dark Knowledge for Intrinsic Multimodal Out-of-Distribution Detection</td><td>OOD detection</td><td>OOD</td></tr>
+        <tr><td>Why Feature Magnitude Deceives OOD Detectors: An Angular Separation Perspective</td><td>OOD detection</td><td>OOD</td></tr>
+        <tr><td>Ranked Activation Shift for Post-hoc Out-of-Distribution Detection</td><td>OOD detection</td><td>OOD</td></tr>
+        <tr><td>Distribution-Aware Feature Selection for Post-hoc Out-of-Distribution Detection</td><td>OOD detection</td><td>OOD</td></tr>
+        <tr><td>Modality-Aware Out-of-Distribution Detection for Multi-Modal Action Recognition</td><td>OOD detection</td><td>OOD</td></tr>
+        <tr><td>Exploiting Local Flatness for Efficient Out-of-Distribution Detection</td><td>OOD detection</td><td>OOD</td></tr>
+        <tr><td>Unified Multi-Layer Subspace Modeling for Cross-Domain OOD Detection</td><td>OOD detection</td><td>OOD</td></tr>
         <tr><td>Coordinate Singularities Break Conformal Coverage for Gaze and Head Pose</td><td>Geometry / pose / matching</td><td>conformal</td></tr>
         <tr><td>SPARC: Single-Pass Scaling for Motion Forecasting with Conformal Bayesian Last Layers</td><td>Geometry / pose / matching</td><td>conformal · Bayesian</td></tr>
         <tr><td>Ice Cloud Geometry Retrieval with Calibrated Uncertainty from Passive Satellite Imagery</td><td>Medical / scientific imaging</td><td>conformal · UQ</td></tr>
@@ -240,7 +266,8 @@
         <tr><td>Combining Discrepancy-Confusion Uncertainty and Calibration Diversity for Active Fine-Grained Image Classification</td><td>Geometry / pose / matching</td><td>UQ · calibration</td></tr>
       </tbody>
     </table>
-    <p class="caption">Relative to video generation (8.7%) or 3DGS (8.0%), UQ is still a small theme. Uncertainty is more often a module inside reconstruction, driving, or medical tasks than a standalone theory track.</p>
+    </details>
+    <p class="caption">Relative to video generation (8.7%) or 3DGS (8.0%), UQ / OOD is still a small theme. OOD detection is the largest slice among these 38 papers (9). Remaining uncertainty work is more often a module inside reconstruction, driving, or medical tasks.</p>
 
     <h2>Wuhan university groups</h2>
     <p>114 papers have at least one Wuhan-university author (4.0%). 53 are last-authored by Wuhan faculty. No orals; five spotlights. HUST and Wuhan University dominate.</p>
@@ -413,6 +440,7 @@
     table(document.getElementById("wh-table"), ["PI","University","Papers","Spotlight","Focus"], WH_GROUPS, 2);
 
     const UQ_THEMES = [
+      {k:"OOD detection", v:9, c:"#a33b4a"},
       {k:"Geometry / pose / matching", v:7, c:"#233c8e"},
       {k:"Medical / scientific imaging", v:6, c:"#c45c26"},
       {k:"Recognition / tracking / open-world", v:6, c:"#2a7a62"},

@@ -103,6 +103,21 @@
     }
     .pie-legend-row { display: grid; grid-template-columns: 14px 1fr auto auto; gap: 8px; align-items: center; font-size: 0.88rem; margin: 5px 0; }
     .pie-legend-row b { font-weight: 600; }
+    details.paper-fold {
+      background: var(--paper);
+      border: 1px solid var(--line);
+      margin: 12px 0 18px;
+    }
+    details.paper-fold > summary {
+      cursor: pointer;
+      padding: 10px 14px;
+      font-weight: 600;
+      list-style: none;
+    }
+    details.paper-fold > summary::-webkit-details-marker { display: none; }
+    details.paper-fold > summary::after { content: " ▾"; color: var(--muted); font-weight: 400; }
+    details.paper-fold[open] > summary::after { content: " ▴"; }
+    details.paper-fold table { margin: 0; border: 0; }
     footer { padding: 24px 22px 40px; color: var(--muted); font-size: 0.82rem; }
     @media (max-width: 800px) {
       .stats, .cols, .cols3, .pie-box { grid-template-columns: 1fr; }
@@ -189,24 +204,35 @@
     <h3>18 个领域对照</h3>
     <div style="overflow:auto"><table id="eu-table"></table></div>
 
-    <h2>Uncertainty / conformal / calibration</h2>
-    <p>大会没有单独的 uncertainty 领域。标题点名约 1.0%；摘要出现 uncertainty 约 3.5%。Conformal 只有 3 篇。</p>
+    <h2>Uncertainty / conformal / calibration / OOD</h2>
+    <p>大会没有单独的 uncertainty 领域。标题点名 UQ、conformal、校准或 OOD detection 约 1.3%；摘要出现 uncertainty 约 3.5%。Conformal 只有 3 篇，OOD detection 9 篇。</p>
     <div class="stats">
-      <div class="stat"><b>29</b><span>标题点名 · 1.0%</span></div>
-      <div class="stat"><b>100</b><span>摘要含 uncertainty · 3.5%</span></div>
+      <div class="stat"><b>38</b><span>标题点名 · 1.3%</span></div>
+      <div class="stat"><b>9</b><span>OOD detection · 0.32%</span></div>
       <div class="stat"><b>3</b><span>conformal · 0.11%</span></div>
       <div class="stat"><b>12</b><span>严格置信度校准 · 0.4%</span></div>
     </div>
-    <div class="note"><strong>calibration 容易误计。</strong>摘要里的 calibrat 大多是相机标定或 attention recalibration。按 temperature scaling / ECE / confidence calibration 收紧后剩 12 篇。</div>
-    <h3>29 篇按应用主题</h3>
-    <p class="muted">互斥归类，按官方第一关键词合并。MED-LCDS 计入识别/分类，GeMoE 计入 VLM。分母 29 篇。</p>
+    <div class="note"><strong>calibration 容易误计；OOD 只收 detection。</strong>摘要里的 calibrat 大多是相机标定或 attention recalibration。OOD 只计入标题明确做 out-of-distribution / OOD detection 的论文，不含泛化评测里顺带提到 OOD 的生成或驾驶论文。</div>
+    <h3>38 篇按应用主题</h3>
+    <p class="muted">互斥归类。OOD detection 单独成类；其余按官方第一关键词合并。MED-LCDS 计入识别/分类，GeMoE 计入 VLM。分母 38 篇。</p>
     <div class="pie-box">
       <svg id="uq-pie" viewBox="0 0 220 220" width="220" height="220" aria-label="UQ papers by theme"></svg>
       <div id="uq-pie-legend"></div>
     </div>
+    <details class="paper-fold">
+      <summary>展开 38 篇论文列表</summary>
     <table>
       <thead><tr><th>论文</th><th>主题</th><th>标签</th></tr></thead>
       <tbody>
+        <tr><td>If It's Not Efficient, It's Not Usable: Real-Time OOD Detection with Latent De-Biasing and High-Quality Negative Samples</td><td>OOD detection</td><td>OOD</td></tr>
+        <tr><td>NegAS: Negative Label Guided Attention and Scoring for Out-of-Distribution Object Detection with Vision-Language Models</td><td>OOD detection</td><td>OOD</td></tr>
+        <tr><td>Leveraging Dark Knowledge for Intrinsic Multimodal Out-of-Distribution Detection</td><td>OOD detection</td><td>OOD</td></tr>
+        <tr><td>Why Feature Magnitude Deceives OOD Detectors: An Angular Separation Perspective</td><td>OOD detection</td><td>OOD</td></tr>
+        <tr><td>Ranked Activation Shift for Post-hoc Out-of-Distribution Detection</td><td>OOD detection</td><td>OOD</td></tr>
+        <tr><td>Distribution-Aware Feature Selection for Post-hoc Out-of-Distribution Detection</td><td>OOD detection</td><td>OOD</td></tr>
+        <tr><td>Modality-Aware Out-of-Distribution Detection for Multi-Modal Action Recognition</td><td>OOD detection</td><td>OOD</td></tr>
+        <tr><td>Exploiting Local Flatness for Efficient Out-of-Distribution Detection</td><td>OOD detection</td><td>OOD</td></tr>
+        <tr><td>Unified Multi-Layer Subspace Modeling for Cross-Domain OOD Detection</td><td>OOD detection</td><td>OOD</td></tr>
         <tr><td>Coordinate Singularities Break Conformal Coverage for Gaze and Head Pose</td><td>几何 / 位姿 / 匹配</td><td>conformal</td></tr>
         <tr><td>SPARC: Single-Pass Scaling for Motion Forecasting with Conformal Bayesian Last Layers</td><td>几何 / 位姿 / 匹配</td><td>conformal · Bayesian</td></tr>
         <tr><td>Ice Cloud Geometry Retrieval with Calibrated Uncertainty from Passive Satellite Imagery</td><td>医学 / 科学成像</td><td>conformal · UQ</td></tr>
@@ -238,7 +264,8 @@
         <tr><td>Combining Discrepancy-Confusion Uncertainty and Calibration Diversity for Active Fine-Grained Image Classification</td><td>几何 / 位姿 / 匹配</td><td>UQ · 校准</td></tr>
       </tbody>
     </table>
-    <p class="caption">相对视频生成（8.7%）或 3DGS（8.0%），UQ 仍是小方向；uncertainty 多作为重建、驾驶、医学任务的模块出现。</p>
+    </details>
+    <p class="caption">相对视频生成（8.7%）或 3DGS（8.0%），UQ / OOD 仍是小方向。OOD detection 是这 38 篇里最大的一块（9 篇），其余 uncertainty 多作为重建、驾驶、医学任务的模块出现。</p>
 
     <h2>武汉高校课题组</h2>
     <p>114 篇含武汉高校作者（4.0%），其中 53 篇末位作者是武汉教师。无 Oral，5 篇 Spotlight。华科与武大为主体。</p>
@@ -403,6 +430,7 @@
     table(document.getElementById("wh-table"), ["负责人","学校","篇数","Spotlight","方向"], WH_GROUPS, 2);
 
     const UQ_THEMES = [
+      {k:"OOD detection", v:9, c:"#a33b4a"},
       {k:"几何 / 位姿 / 匹配", v:7, c:"#233c8e"},
       {k:"医学 / 科学成像", v:6, c:"#c45c26"},
       {k:"识别 / 跟踪 / 开放世界", v:6, c:"#2a7a62"},
