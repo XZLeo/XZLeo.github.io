@@ -118,6 +118,7 @@
     details.paper-fold > summary::after { content: " ▾"; color: var(--muted); font-weight: 400; }
     details.paper-fold[open] > summary::after { content: " ▴"; }
     details.paper-fold table { margin: 0; border: 0; }
+    details.paper-fold .fold-inner { padding: 0 14px 14px; }
     footer { padding: 24px 22px 40px; color: var(--muted); font-size: 0.82rem; }
     @media (max-width: 800px) {
       .stats, .cols, .cols3, .pie-box { grid-template-columns: 1fr; }
@@ -164,6 +165,9 @@
 
     <h2>中国论文方向 vs 大会总体</h2>
     <p>18 个官方领域上，中国结构与大会接近，只是识别/分割、具身与生成略高，经典几何与理论略低，差值都在 1–2 个百分点。</p>
+    <details class="paper-fold">
+      <summary>展开领域条形图与对照表</summary>
+      <div class="fold-inner">
     <div class="legend">
       <span><i class="sw" style="background:var(--bar2)"></i>大会全体</span>
       <span><i class="sw" style="background:var(--bar)"></i>中国大陆</span>
@@ -180,6 +184,8 @@
         <table id="cn-down"></table>
       </div>
     </div>
+      </div>
+    </details>
 
     <h2>瑞典、荷兰、法国</h2>
     <p>东道主瑞典一作仅 11 篇（0.4%）。三国样本小，百分比当结构信号读：瑞典几何占一半，荷兰偏具身与三维，法国偏生成与理论。</p>
@@ -201,26 +207,28 @@
       <div class="card"><h3>荷兰：具身 + 三维</h3><p class="muted">具身/驾驶 16.1%（大会 6.8%）。Amsterdam 偏模型与 VLM，Delft 偏匹配与驾驶。视频理解偏低。</p></div>
       <div class="card"><h3>法国：生成与理论</h3><p class="muted">视频生成 14.3%；鲁棒性/理论、配准、分割、底层修复各约 10%。具身仅 1 篇。</p></div>
     </div>
-    <h3>18 个领域对照</h3>
-    <div style="overflow:auto"><table id="eu-table"></table></div>
+    <details class="paper-fold">
+      <summary>展开 18 个领域对照表</summary>
+      <div class="fold-inner" style="overflow:auto"><table id="eu-table"></table></div>
+    </details>
 
-    <h2>Uncertainty / conformal / calibration / OOD</h2>
-    <p>大会没有单独的 uncertainty 领域。标题点名 UQ、conformal、校准或 OOD detection 约 1.3%；摘要出现 uncertainty 约 3.5%。Conformal 只有 3 篇，OOD detection 9 篇。</p>
+    <h2>Uncertainty / conformal / calibration / OOD / AL</h2>
+    <p>大会没有单独的 uncertainty 领域。标题点名 UQ、conformal、校准、OOD detection，或含 active 且以采集更多数据再训练/更新模型为目的，合计约 1.5%。OOD detection 9 篇；主动采集 7 篇；conformal 3 篇。</p>
     <div class="stats">
-      <div class="stat"><b>38</b><span>标题点名 · 1.3%</span></div>
+      <div class="stat"><b>43</b><span>标题点名 · 1.5%</span></div>
       <div class="stat"><b>9</b><span>OOD detection · 0.32%</span></div>
+      <div class="stat"><b>7</b><span>主动采集 / AL · 0.25%</span></div>
       <div class="stat"><b>3</b><span>conformal · 0.11%</span></div>
-      <div class="stat"><b>12</b><span>严格置信度校准 · 0.4%</span></div>
     </div>
-    <div class="note"><strong>calibration 容易误计；OOD 只收 detection。</strong>摘要里的 calibrat 大多是相机标定或 attention recalibration。OOD 只计入标题明确做 out-of-distribution / OOD detection 的论文，不含泛化评测里顺带提到 OOD 的生成或驾驶论文。</div>
-    <h3>38 篇按应用主题</h3>
-    <p class="muted">互斥归类。OOD detection 单独成类；其余按官方第一关键词合并。MED-LCDS 计入识别/分类，GeMoE 计入 VLM。分母 38 篇。</p>
+    <div class="note"><strong>Active 口径。</strong>标题含 active，且目标是采集更多标注、视角或样本来训练/更新模型：经典 active learning、next-best-view / 主动重建、主动测试时标注。不含 active speaker、active tracking、active–passive motion、推理时 zoom / 换视角但不重训的 active perception。</div>
+    <h3>43 篇按应用主题</h3>
+    <p class="muted">互斥归类。OOD detection 与主动采集单独成类。分母 43 篇。</p>
     <div class="pie-box">
       <svg id="uq-pie" viewBox="0 0 220 220" width="220" height="220" aria-label="UQ papers by theme"></svg>
       <div id="uq-pie-legend"></div>
     </div>
     <details class="paper-fold">
-      <summary>展开 38 篇论文列表</summary>
+      <summary>展开 43 篇论文列表</summary>
     <table>
       <thead><tr><th>论文</th><th>主题</th><th>标签</th></tr></thead>
       <tbody>
@@ -233,6 +241,13 @@
         <tr><td>Modality-Aware Out-of-Distribution Detection for Multi-Modal Action Recognition</td><td>OOD detection</td><td>OOD</td></tr>
         <tr><td>Exploiting Local Flatness for Efficient Out-of-Distribution Detection</td><td>OOD detection</td><td>OOD</td></tr>
         <tr><td>Unified Multi-Layer Subspace Modeling for Cross-Domain OOD Detection</td><td>OOD detection</td><td>OOD</td></tr>
+        <tr><td>A Mechanism-Driven Theory of Phase Transitions in Active Learning</td><td>主动采集 / AL</td><td>AL</td></tr>
+        <tr><td>FuDU: A Fuzzy Dual-dimension Uncertainty Framework for Streaming Active Learning in Industrial Defect Detection</td><td>主动采集 / AL</td><td>UQ · AL</td></tr>
+        <tr><td>Combining Discrepancy-Confusion Uncertainty and Calibration Diversity for Active Fine-Grained Image Classification</td><td>主动采集 / AL</td><td>UQ · AL · 校准</td></tr>
+        <tr><td>ActiveStructure: Plane Scene Graph-Guided Active 3D Gaussian Splatting</td><td>主动采集 / AL</td><td>NBV · 3DGS</td></tr>
+        <tr><td>Active View Selection with Perturbed Gaussian Ensemble for Tomographic Reconstruction</td><td>主动采集 / AL</td><td>NBV · CT</td></tr>
+        <tr><td>R3RECON: Radiance-Field-Free Active Reconstruction via Renderability</td><td>主动采集 / AL</td><td>NBV</td></tr>
+        <tr><td>Probe, Anchor, and Amend: Active Test-Time Adaptation of Vision-Language Models</td><td>主动采集 / AL</td><td>ATTA</td></tr>
         <tr><td>Coordinate Singularities Break Conformal Coverage for Gaze and Head Pose</td><td>几何 / 位姿 / 匹配</td><td>conformal</td></tr>
         <tr><td>SPARC: Single-Pass Scaling for Motion Forecasting with Conformal Bayesian Last Layers</td><td>几何 / 位姿 / 匹配</td><td>conformal · Bayesian</td></tr>
         <tr><td>Ice Cloud Geometry Retrieval with Calibrated Uncertainty from Passive Satellite Imagery</td><td>医学 / 科学成像</td><td>conformal · UQ</td></tr>
@@ -244,7 +259,6 @@
         <tr><td>Auto3R: Automated 3D Reconstruction and Scanning via Data-driven Uncertainty Quantification</td><td>几何 / 位姿 / 匹配</td><td>UQ</td></tr>
         <tr><td>Bayesian Uncertainty Attribution-Guided Fine-Tuning for Open-Set Action Recognition</td><td>识别 / 跟踪 / 开放世界</td><td>Bayesian UQ</td></tr>
         <tr><td>Analytic Bayesian Uncertainty for LiDAR Segmentation: A Single-pass Generative Approach</td><td>几何 / 位姿 / 匹配</td><td>Bayesian UQ</td></tr>
-        <tr><td>FuDU: A Fuzzy Dual-dimension Uncertainty Framework for Streaming Active Learning in Industrial Defect Detection</td><td>识别 / 跟踪 / 开放世界</td><td>UQ</td></tr>
         <tr><td>Uncertainty-aware tree height change regression</td><td>识别 / 跟踪 / 开放世界</td><td>UQ</td></tr>
         <tr><td>UECP: Uncertainty-Enhanced Collaborative Perception</td><td>具身 / 驾驶 / 鲁棒性</td><td>UQ</td></tr>
         <tr><td>NegROI: Click-Centric Uncertainty-Guided Refinement with Scene-Conditioned Negative Prompts for Robust Interactive 3D Segmentation</td><td>识别 / 跟踪 / 开放世界</td><td>UQ</td></tr>
@@ -261,11 +275,10 @@
         <tr><td>GeMoE: Gating Entropy is All You Need for Uncertainty-aware Adaptive Routing in MoE-based Large Vision-Language Models</td><td>生成 / VLM / 多模态</td><td>UQ</td></tr>
         <tr><td>Multi-Channel Uncertainty-Weighted Score Matching for Conditional Diffusion in Medical UDA</td><td>医学 / 科学成像</td><td>UQ</td></tr>
         <tr><td>Distribution-Alignment Bridge for Uncertainty-Aware Text-to-Video Retrieval</td><td>生成 / VLM / 多模态</td><td>UQ</td></tr>
-        <tr><td>Combining Discrepancy-Confusion Uncertainty and Calibration Diversity for Active Fine-Grained Image Classification</td><td>几何 / 位姿 / 匹配</td><td>UQ · 校准</td></tr>
       </tbody>
     </table>
     </details>
-    <p class="caption">相对视频生成（8.7%）或 3DGS（8.0%），UQ / OOD 仍是小方向。OOD detection 是这 38 篇里最大的一块（9 篇），其余 uncertainty 多作为重建、驾驶、医学任务的模块出现。</p>
+    <p class="caption">相对视频生成（8.7%）或 3DGS（8.0%）仍是小方向。OOD detection 9 篇；主动采集（标注查询 + 选视角重建 + 测试时标注）7 篇。</p>
 
     <h2>武汉高校课题组</h2>
     <p>114 篇含武汉高校作者（4.0%），其中 53 篇末位作者是武汉教师。无 Oral，5 篇 Spotlight。华科与武大为主体。</p>
@@ -280,9 +293,13 @@
       <span><i class="sw" style="background:var(--bar)"></i>该校教师末位主导</span>
     </div>
     <div id="wh-bars" class="bars"></div>
-    <h3>末位作者为武汉教师（按篇数）</h3>
+    <details class="paper-fold">
+      <summary>展开武汉教师列表</summary>
+      <div class="fold-inner">
     <table id="wh-table"></table>
     <p class="muted">课题组按论文末位作者归并。合作论文若末位不在武汉，只计入 114 篇参与。</p>
+      </div>
+    </details>
   </main>
   <footer>
     分析日期 2026-09-13 · 数据：<a href="https://eccv.ecva.net/virtual/2026/papers.html">ECCV 2026 virtual site</a>、<a href="https://eccv.ecva.net/Conferences/2026/AcceptedPapers">Accepted Papers</a>。
@@ -431,12 +448,13 @@
 
     const UQ_THEMES = [
       {k:"OOD detection", v:9, c:"#a33b4a"},
-      {k:"几何 / 位姿 / 匹配", v:7, c:"#233c8e"},
+      {k:"几何 / 位姿 / 匹配", v:6, c:"#233c8e"},
       {k:"医学 / 科学成像", v:6, c:"#c45c26"},
-      {k:"识别 / 跟踪 / 开放世界", v:6, c:"#2a7a62"},
+      {k:"识别 / 跟踪 / 开放世界", v:5, c:"#2a7a62"},
       {k:"生成 / VLM / 多模态", v:4, c:"#6b4c9a"},
       {k:"三维重建 / 3DGS", v:3, c:"#3d5aab"},
-      {k:"具身 / 驾驶 / 鲁棒性", v:3, c:"#8a93a8"}
+      {k:"具身 / 驾驶 / 鲁棒性", v:3, c:"#8a93a8"},
+      {k:"主动采集 / AL", v:7, c:"#0e6e6e"}
     ];
     (function drawUqPie() {
       const svg = document.getElementById("uq-pie");

@@ -119,6 +119,7 @@
     details.paper-fold > summary::after { content: " ▾"; color: var(--muted); font-weight: 400; }
     details.paper-fold[open] > summary::after { content: " ▴"; }
     details.paper-fold table { margin: 0; border: 0; }
+    details.paper-fold .fold-inner { padding: 0 14px 14px; }
     footer { padding: 24px 22px 40px; color: var(--muted); font-size: 0.82rem; }
     @media (max-width: 800px) {
       .stats, .cols, .cols3, .pie-box { grid-template-columns: 1fr; }
@@ -166,6 +167,9 @@
 
     <h2>China’s topic mix vs the conference</h2>
     <p>Across the 18 official first-keyword areas, mainland China’s mix is close to the conference overall. Recognition / segmentation, embodied AI, and generation are slightly higher; classical geometry and theory are slightly lower. All gaps are 1–2 percentage points.</p>
+    <details class="paper-fold">
+      <summary>Show area bars and comparison tables</summary>
+      <div class="fold-inner">
     <div class="legend">
       <span><i class="sw" style="background:var(--bar2)"></i>All papers</span>
       <span><i class="sw" style="background:var(--bar)"></i>Mainland China</span>
@@ -182,6 +186,8 @@
         <table id="cn-down"></table>
       </div>
     </div>
+      </div>
+    </details>
 
     <h2>Sweden, Netherlands, France</h2>
     <p>Host-country Sweden has only 11 first-author papers (0.4%). Sample sizes are small, so percentages are structural signals: Sweden is half geometry, the Netherlands leans embodied and 3D, France leans generation and theory.</p>
@@ -203,26 +209,28 @@
       <div class="card"><h3>Netherlands: embodied + 3D</h3><p class="muted">Embodied / driving is 16.1% (conference 6.8%). Amsterdam leans models and VLMs; Delft leans matching and driving. Video understanding is low.</p></div>
       <div class="card"><h3>France: generation and theory</h3><p class="muted">Video generation 14.3%. Robustness / theory, registration, segmentation, and low-level restoration are each about 10%. Only one embodied paper.</p></div>
     </div>
-    <h3>All 18 areas</h3>
-    <div style="overflow:auto"><table id="eu-table"></table></div>
+    <details class="paper-fold">
+      <summary>Show all 18 areas</summary>
+      <div class="fold-inner" style="overflow:auto"><table id="eu-table"></table></div>
+    </details>
 
-    <h2>Uncertainty / conformal / calibration / OOD</h2>
-    <p>There is no official uncertainty area. Titles that name UQ, conformal prediction, confidence calibration, or OOD detection are about 1.3% of the conference. “Uncertainty” in the abstract is 3.5%. Conformal prediction appears in only three papers; OOD detection in nine.</p>
+    <h2>Uncertainty / conformal / calibration / OOD / AL</h2>
+    <p>There is no official uncertainty area. Titles that name UQ, conformal prediction, confidence calibration, OOD detection, or <em>active</em> data collection for (re)training are about 1.5% of the conference. OOD detection: 9. Active collection: 7. Conformal: 3.</p>
     <div class="stats">
-      <div class="stat"><b>38</b><span>Named in the title · 1.3%</span></div>
+      <div class="stat"><b>43</b><span>Named in the title · 1.5%</span></div>
       <div class="stat"><b>9</b><span>OOD detection · 0.32%</span></div>
+      <div class="stat"><b>7</b><span>Active collection / AL · 0.25%</span></div>
       <div class="stat"><b>3</b><span>Conformal prediction · 0.11%</span></div>
-      <div class="stat"><b>12</b><span>Strict confidence calibration · 0.4%</span></div>
     </div>
-    <div class="note"><strong>Calibration is easy to over-count; OOD here means detection.</strong> Most abstract hits for “calibrat*” are camera calibration or attention recalibration. OOD counts only titles that name out-of-distribution / OOD detection, not papers that mention OOD merely as a generalization test.</div>
-    <h3>38 papers by application theme</h3>
-    <p class="muted">Mutually exclusive groups. OOD detection is its own slice; the rest merge official first keywords. MED-LCDS is counted as recognition / classification; GeMoE as VLM. Denominator: 38 title-explicit papers.</p>
+    <div class="note"><strong>What “active” includes.</strong> The title contains <em>active</em>, and the paper tries to collect more labels, views, or samples to train or update a model: classical active learning, next-best-view / active reconstruction, and active test-time annotation. Not included: active speaker detection, active tracking, active–passive motion, or active perception that only zooms or turns the camera at inference without retraining.</div>
+    <h3>43 papers by application theme</h3>
+    <p class="muted">Mutually exclusive groups. OOD detection and active collection are their own slices. Denominator: 43 title-explicit papers.</p>
     <div class="pie-box">
       <svg id="uq-pie" viewBox="0 0 220 220" width="220" height="220" aria-label="UQ papers by theme"></svg>
       <div id="uq-pie-legend"></div>
     </div>
     <details class="paper-fold">
-      <summary>Show 38-paper list</summary>
+      <summary>Show 43-paper list</summary>
     <table>
       <thead><tr><th>Paper</th><th>Theme</th><th>Tag</th></tr></thead>
       <tbody>
@@ -235,6 +243,13 @@
         <tr><td>Modality-Aware Out-of-Distribution Detection for Multi-Modal Action Recognition</td><td>OOD detection</td><td>OOD</td></tr>
         <tr><td>Exploiting Local Flatness for Efficient Out-of-Distribution Detection</td><td>OOD detection</td><td>OOD</td></tr>
         <tr><td>Unified Multi-Layer Subspace Modeling for Cross-Domain OOD Detection</td><td>OOD detection</td><td>OOD</td></tr>
+        <tr><td>A Mechanism-Driven Theory of Phase Transitions in Active Learning</td><td>Active collection / AL</td><td>AL</td></tr>
+        <tr><td>FuDU: A Fuzzy Dual-dimension Uncertainty Framework for Streaming Active Learning in Industrial Defect Detection</td><td>Active collection / AL</td><td>UQ · AL</td></tr>
+        <tr><td>Combining Discrepancy-Confusion Uncertainty and Calibration Diversity for Active Fine-Grained Image Classification</td><td>Active collection / AL</td><td>UQ · AL · calibration</td></tr>
+        <tr><td>ActiveStructure: Plane Scene Graph-Guided Active 3D Gaussian Splatting</td><td>Active collection / AL</td><td>NBV · 3DGS</td></tr>
+        <tr><td>Active View Selection with Perturbed Gaussian Ensemble for Tomographic Reconstruction</td><td>Active collection / AL</td><td>NBV · CT</td></tr>
+        <tr><td>R3RECON: Radiance-Field-Free Active Reconstruction via Renderability</td><td>Active collection / AL</td><td>NBV</td></tr>
+        <tr><td>Probe, Anchor, and Amend: Active Test-Time Adaptation of Vision-Language Models</td><td>Active collection / AL</td><td>ATTA</td></tr>
         <tr><td>Coordinate Singularities Break Conformal Coverage for Gaze and Head Pose</td><td>Geometry / pose / matching</td><td>conformal</td></tr>
         <tr><td>SPARC: Single-Pass Scaling for Motion Forecasting with Conformal Bayesian Last Layers</td><td>Geometry / pose / matching</td><td>conformal · Bayesian</td></tr>
         <tr><td>Ice Cloud Geometry Retrieval with Calibrated Uncertainty from Passive Satellite Imagery</td><td>Medical / scientific imaging</td><td>conformal · UQ</td></tr>
@@ -246,7 +261,6 @@
         <tr><td>Auto3R: Automated 3D Reconstruction and Scanning via Data-driven Uncertainty Quantification</td><td>Geometry / pose / matching</td><td>UQ</td></tr>
         <tr><td>Bayesian Uncertainty Attribution-Guided Fine-Tuning for Open-Set Action Recognition</td><td>Recognition / tracking / open-world</td><td>Bayesian UQ</td></tr>
         <tr><td>Analytic Bayesian Uncertainty for LiDAR Segmentation: A Single-pass Generative Approach</td><td>Geometry / pose / matching</td><td>Bayesian UQ</td></tr>
-        <tr><td>FuDU: A Fuzzy Dual-dimension Uncertainty Framework for Streaming Active Learning in Industrial Defect Detection</td><td>Recognition / tracking / open-world</td><td>UQ</td></tr>
         <tr><td>Uncertainty-aware tree height change regression</td><td>Recognition / tracking / open-world</td><td>UQ</td></tr>
         <tr><td>UECP: Uncertainty-Enhanced Collaborative Perception</td><td>Embodied / driving / robustness</td><td>UQ</td></tr>
         <tr><td>NegROI: Click-Centric Uncertainty-Guided Refinement with Scene-Conditioned Negative Prompts for Robust Interactive 3D Segmentation</td><td>Recognition / tracking / open-world</td><td>UQ</td></tr>
@@ -263,11 +277,10 @@
         <tr><td>GeMoE: Gating Entropy is All You Need for Uncertainty-aware Adaptive Routing in MoE-based Large Vision-Language Models</td><td>Generation / VLM / multimodal</td><td>UQ</td></tr>
         <tr><td>Multi-Channel Uncertainty-Weighted Score Matching for Conditional Diffusion in Medical UDA</td><td>Medical / scientific imaging</td><td>UQ</td></tr>
         <tr><td>Distribution-Alignment Bridge for Uncertainty-Aware Text-to-Video Retrieval</td><td>Generation / VLM / multimodal</td><td>UQ</td></tr>
-        <tr><td>Combining Discrepancy-Confusion Uncertainty and Calibration Diversity for Active Fine-Grained Image Classification</td><td>Geometry / pose / matching</td><td>UQ · calibration</td></tr>
       </tbody>
     </table>
     </details>
-    <p class="caption">Relative to video generation (8.7%) or 3DGS (8.0%), UQ / OOD is still a small theme. OOD detection is the largest slice among these 38 papers (9). Remaining uncertainty work is more often a module inside reconstruction, driving, or medical tasks.</p>
+    <p class="caption">Relative to video generation (8.7%) or 3DGS (8.0%) this is still a small theme. OOD detection: 9 papers. Active collection (label queries + next-best-view reconstruction + test-time annotation): 7.</p>
 
     <h2>Wuhan university groups</h2>
     <p>114 papers have at least one Wuhan-university author (4.0%). 53 are last-authored by Wuhan faculty. No orals; five spotlights. HUST and Wuhan University dominate.</p>
@@ -282,9 +295,13 @@
       <span><i class="sw" style="background:var(--bar)"></i>Last-authored by that university’s faculty</span>
     </div>
     <div id="wh-bars" class="bars"></div>
-    <h3>Last author is Wuhan faculty (by paper count)</h3>
+    <details class="paper-fold">
+      <summary>Show Wuhan faculty list</summary>
+      <div class="fold-inner">
     <table id="wh-table"></table>
     <p class="muted">Groups are merged by last author. Collaborative papers whose last author is not in Wuhan count only in the 114-paper participation set.</p>
+      </div>
+    </details>
   </main>
   <footer>
     Analysis date 13 September 2026 · Data:
@@ -441,12 +458,13 @@
 
     const UQ_THEMES = [
       {k:"OOD detection", v:9, c:"#a33b4a"},
-      {k:"Geometry / pose / matching", v:7, c:"#233c8e"},
+      {k:"Geometry / pose / matching", v:6, c:"#233c8e"},
       {k:"Medical / scientific imaging", v:6, c:"#c45c26"},
-      {k:"Recognition / tracking / open-world", v:6, c:"#2a7a62"},
+      {k:"Recognition / tracking / open-world", v:5, c:"#2a7a62"},
       {k:"Generation / VLM / multimodal", v:4, c:"#6b4c9a"},
       {k:"3D reconstruction / 3DGS", v:3, c:"#3d5aab"},
-      {k:"Embodied / driving / robustness", v:3, c:"#8a93a8"}
+      {k:"Embodied / driving / robustness", v:3, c:"#8a93a8"},
+      {k:"Active collection / AL", v:7, c:"#0e6e6e"}
     ];
     (function drawUqPie() {
       const svg = document.getElementById("uq-pie");
