@@ -161,9 +161,12 @@
     <h3 id="country-title">First-author papers (top 12)</h3>
     <div id="country-bars" class="bars"></div>
     <p class="caption">Horizontal axis: paper count. Source: ECCV 2026 virtual site · first-author mapping coverage 91%.</p>
-    <div style="overflow:auto">
+    <details class="paper-fold">
+      <summary>Show country table</summary>
+      <div class="fold-inner" style="overflow:auto">
       <table id="country-table"></table>
-    </div>
+      </div>
+    </details>
 
     <h2>China’s topic mix vs the conference</h2>
     <p>Across the 18 official first-keyword areas, mainland China’s mix is close to the conference overall. Recognition / segmentation, embodied AI, and generation are slightly higher; classical geometry and theory are slightly lower. All gaps are 1–2 percentage points.</p>
@@ -214,6 +217,31 @@
       <div class="fold-inner" style="overflow:auto"><table id="eu-table"></table></div>
     </details>
 
+    <h2>Germany, United Kingdom, Switzerland</h2>
+    <p>These are Europe’s top three by volume. Germany has 101 first-author papers (3.6%), the UK 75, Switzerland 35. Germany leans 3D graphics and geometry, the UK video generation and 3DGS, Switzerland geometry; all three under-index image generation.</p>
+    <div class="stats" style="grid-template-columns:repeat(3,1fr)">
+      <div class="stat"><b>173</b><span>Germany · 101 first-author · TUM / MPI / Bosch / KIT / Tübingen</span></div>
+      <div class="stat"><b>177</b><span>UK · 75 first-author · Oxford / Imperial / DeepMind / Surrey</span></div>
+      <div class="stat"><b>68</b><span>Switzerland · 35 first-author · ETH / EPFL / UZH</span></div>
+    </div>
+    <div class="legend">
+      <span><i class="sw" style="background:var(--bar2)"></i>Conference</span>
+      <span><i class="sw" style="background:var(--bar3)"></i>Germany</span>
+      <span><i class="sw" style="background:var(--bar4)"></i>United Kingdom</span>
+      <span><i class="sw" style="background:var(--bar)"></i>Switzerland</span>
+    </div>
+    <div id="eu3-bars" class="bars"></div>
+    <p class="caption">Ten areas with the largest deviations. University of New South Wales is excluded from the UK; Bosch LLC (US) is not counted as Germany.</p>
+    <div class="cols3">
+      <div class="card"><h3>Germany: 3D graphics + geometry</h3><p class="muted">3D graphics 10.6% (conference 4.0%), 3D reconstruction 8.8%, geometry 8.1%. Image generation is only 1.9% (conference 7.1%). Hubs: TUM, MPI Informatics, Bosch, KIT, Tübingen, Bonn.</p></div>
+      <div class="card"><h3>UK: video generation + 3DGS</h3><p class="muted">Video generation 12.8% (conference 8.7%), 3DGS 9.8%. Oxford, Imperial, DeepMind, Surrey, and Cambridge dominate. Image generation is also low.</p></div>
+      <div class="card"><h3>Switzerland: geometry-heavy</h3><p class="muted">Geometry 14.5% (conference 5.0%), video generation 11.8%; 3DGS, embodied, medical, and 3D reconstruction are each about 8%. Zero papers in robustness / theory. Many ETH–Microsoft co-affiliations.</p></div>
+    </div>
+    <details class="paper-fold">
+      <summary>Show all 18 areas</summary>
+      <div class="fold-inner" style="overflow:auto"><table id="eu3-table"></table></div>
+    </details>
+
     <h2>Uncertainty / conformal / calibration / OOD / AL</h2>
     <p>There is no official uncertainty area. Titles that name UQ, conformal prediction, confidence calibration, OOD detection, or <em>active</em> data collection for (re)training are about 1.5% of the conference. OOD detection: 9. Active collection: 7. Conformal: 3.</p>
     <div class="stats">
@@ -231,6 +259,7 @@
     </div>
     <details class="paper-fold">
       <summary>Show 43-paper list</summary>
+      <div class="fold-inner" style="overflow:auto">
     <table>
       <thead><tr><th>Paper</th><th>Theme</th><th>Tag</th></tr></thead>
       <tbody>
@@ -279,6 +308,7 @@
         <tr><td>Distribution-Alignment Bridge for Uncertainty-Aware Text-to-Video Retrieval</td><td>Generation / VLM / multimodal</td><td>UQ</td></tr>
       </tbody>
     </table>
+      </div>
     </details>
     <p class="caption">Relative to video generation (8.7%) or 3DGS (8.0%) this is still a small theme. OOD detection: 9 papers. Active collection (label queries + next-best-view reconstruction + test-time annotation): 7.</p>
 
@@ -336,30 +366,36 @@
       "Japan":3.07,"Switzerland":2.4,"Canada":1.98,"India":1.38,"Taiwan":1.38,"Italy":1.52,"UAE":1.55,"France":1.48,"Netherlands":1.09,"Sweden":0.71,"Israel":0.81
     };
     const TOPICS = [
-      {s:"Video generation / avatars",all:8.68,cn:8.46,diff:-0.22,se:5,nl:9.68,fr:14.29,seN:1,nlN:3,frN:6},
-      {s:"Video understanding / multimodal",all:8.36,cn:9.34,diff:0.98,se:0,nl:3.23,fr:4.76,seN:0,nlN:1,frN:2},
-      {s:"3DGS / neural rendering",all:7.97,cn:7.31,diff:-0.66,se:5,nl:3.23,fr:4.76,seN:1,nlN:1,frN:2},
-      {s:"Image generation / diffusion",all:7.06,cn:8.32,diff:1.26,se:5,nl:0,fr:0,seN:1,nlN:0,frN:0},
-      {s:"Embodied / robotics / driving",all:6.81,cn:8.46,diff:1.65,se:5,nl:16.13,fr:2.38,seN:1,nlN:5,frN:1},
-      {s:"Open-world recognition / seg.",all:6.21,cn:8.32,diff:2.11,se:5,nl:6.45,fr:9.52,seN:1,nlN:2,frN:4},
-      {s:"Multimodal / document understanding",all:6.21,cn:7.17,diff:0.96,se:10,nl:3.23,fr:4.76,seN:2,nlN:1,frN:2},
-      {s:"VLM / foundation models",all:5.89,cn:5.14,diff:-0.75,se:5,nl:9.68,fr:4.76,seN:1,nlN:3,frN:2},
-      {s:"Recognition / tracking / ReID",all:5.65,cn:5.89,diff:0.24,se:0,nl:0,fr:7.14,seN:0,nlN:0,frN:3},
-      {s:"Computational imaging / medical",all:5.4,cn:4.6,diff:-0.8,se:0,nl:0,fr:4.76,seN:0,nlN:0,frN:2},
-      {s:"Low-level vision / restoration",all:5.4,cn:5.75,diff:0.35,se:0,nl:0,fr:9.52,seN:0,nlN:0,frN:4},
-      {s:"Geometry / localization / matching",all:5.01,cn:3.72,diff:-1.29,se:45,nl:12.9,fr:7.14,seN:9,nlN:4,frN:3},
-      {s:"Federated / continual / efficient",all:4.8,cn:4.87,diff:0.07,se:0,nl:6.45,fr:0,seN:0,nlN:2,frN:0},
-      {s:"3D graphics / representations",all:3.99,cn:3.18,diff:-0.81,se:0,nl:9.68,fr:4.76,seN:0,nlN:3,frN:2},
-      {s:"3D reconstruction / registration",all:3.46,cn:3.38,diff:-0.08,se:5,nl:9.68,fr:9.52,seN:1,nlN:3,frN:4},
-      {s:"Robustness / privacy / theory",all:3.11,cn:2.44,diff:-0.67,se:0,nl:3.23,fr:9.52,seN:0,nlN:1,frN:4},
-      {s:"Foundation-model interpretability",all:3.03,cn:2.1,diff:-0.93,se:5,nl:3.23,fr:2.38,seN:1,nlN:1,frN:1},
-      {s:"Shape recovery / camera geometry",all:2.96,cn:1.56,diff:-1.4,se:5,nl:3.23,fr:0,seN:1,nlN:1,frN:0}
+      {s:"Video generation / avatars",all:8.68,cn:8.46,diff:-0.22,se:5,nl:9.68,fr:14.29,seN:1,nlN:3,frN:6,de:10,uk:12.75,ch:11.84,deN:16,ukN:26,chN:9},
+      {s:"Video understanding / multimodal",all:8.36,cn:9.34,diff:0.98,se:0,nl:3.23,fr:4.76,seN:0,nlN:1,frN:2,de:5,uk:8.33,ch:9.21,deN:8,ukN:17,chN:7},
+      {s:"3DGS / neural rendering",all:7.97,cn:7.31,diff:-0.66,se:5,nl:3.23,fr:4.76,seN:1,nlN:1,frN:2,de:7.5,uk:9.8,ch:7.89,deN:12,ukN:20,chN:6},
+      {s:"Image generation / diffusion",all:7.06,cn:8.32,diff:1.26,se:5,nl:0,fr:0,seN:1,nlN:0,frN:0,de:1.88,uk:3.92,ch:3.95,deN:3,ukN:8,chN:3},
+      {s:"Embodied / robotics / driving",all:6.81,cn:8.46,diff:1.65,se:5,nl:16.13,fr:2.38,seN:1,nlN:5,frN:1,de:7.5,uk:6.86,ch:7.89,deN:12,ukN:14,chN:6},
+      {s:"Open-world recognition / seg.",all:6.21,cn:8.32,diff:2.11,se:5,nl:6.45,fr:9.52,seN:1,nlN:2,frN:4,de:3.75,uk:5.39,ch:2.63,deN:6,ukN:11,chN:2},
+      {s:"Multimodal / document understanding",all:6.21,cn:7.17,diff:0.96,se:10,nl:3.23,fr:4.76,seN:2,nlN:1,frN:2,de:4.38,uk:5.88,ch:2.63,deN:7,ukN:12,chN:2},
+      {s:"VLM / foundation models",all:5.89,cn:5.14,diff:-0.75,se:5,nl:9.68,fr:4.76,seN:1,nlN:3,frN:2,de:6.88,uk:6.86,ch:5.26,deN:11,ukN:14,chN:4},
+      {s:"Recognition / tracking / ReID",all:5.65,cn:5.89,diff:0.24,se:0,nl:0,fr:7.14,seN:0,nlN:0,frN:3,de:7.5,uk:3.43,ch:3.95,deN:12,ukN:7,chN:3},
+      {s:"Computational imaging / medical",all:5.4,cn:4.6,diff:-0.8,se:0,nl:0,fr:4.76,seN:0,nlN:0,frN:2,de:3.13,uk:5.39,ch:7.89,deN:5,ukN:11,chN:6},
+      {s:"Low-level vision / restoration",all:5.4,cn:5.75,diff:0.35,se:0,nl:0,fr:9.52,seN:0,nlN:0,frN:4,de:3.13,uk:3.92,ch:3.95,deN:5,ukN:8,chN:3},
+      {s:"Geometry / localization / matching",all:5.01,cn:3.72,diff:-1.29,se:45,nl:12.9,fr:7.14,seN:9,nlN:4,frN:3,de:8.13,uk:5.88,ch:14.47,deN:13,ukN:12,chN:11},
+      {s:"Federated / continual / efficient",all:4.8,cn:4.87,diff:0.07,se:0,nl:6.45,fr:0,seN:0,nlN:2,frN:0,de:1.88,uk:3.43,ch:2.63,deN:3,ukN:7,chN:2},
+      {s:"3D graphics / representations",all:3.99,cn:3.18,diff:-0.81,se:0,nl:9.68,fr:4.76,seN:0,nlN:3,frN:2,de:10.63,uk:2.94,ch:1.32,deN:17,ukN:6,chN:1},
+      {s:"3D reconstruction / registration",all:3.46,cn:3.38,diff:-0.08,se:5,nl:9.68,fr:9.52,seN:1,nlN:3,frN:4,de:8.75,uk:5.88,ch:7.89,deN:14,ukN:12,chN:6},
+      {s:"Robustness / privacy / theory",all:3.11,cn:2.44,diff:-0.67,se:0,nl:3.23,fr:9.52,seN:0,nlN:1,frN:4,de:3.75,uk:2.45,ch:0,deN:6,ukN:5,chN:0},
+      {s:"Foundation-model interpretability",all:3.03,cn:2.1,diff:-0.93,se:5,nl:3.23,fr:2.38,seN:1,nlN:1,frN:1,de:2.5,uk:3.92,ch:1.32,deN:4,ukN:8,chN:1},
+      {s:"Shape recovery / camera geometry",all:2.96,cn:1.56,diff:-1.4,se:5,nl:3.23,fr:0,seN:1,nlN:1,frN:0,de:3.75,uk:2.94,ch:5.26,deN:6,ukN:6,chN:4}
     ];
     const EU_KEYS = [
       "Geometry / localization / matching","Embodied / robotics / driving","Video generation / avatars",
       "Robustness / privacy / theory","3D reconstruction / registration","Low-level vision / restoration",
       "Open-world recognition / seg.","3D graphics / representations","VLM / foundation models",
       "Multimodal / document understanding"
+    ];
+    const EU3_KEYS = [
+      "3D graphics / representations","Geometry / localization / matching","3D reconstruction / registration",
+      "Video generation / avatars","Image generation / diffusion","3DGS / neural rendering",
+      "Video understanding / multimodal","Embodied / robotics / driving","Computational imaging / medical",
+      "Open-world recognition / seg."
     ];
     const WH_UNI = [
       {k:"HUST",any:55,led:33},{k:"Wuhan University",any:49,led:17},
@@ -449,6 +485,16 @@
     ], 45);
     table(document.getElementById("eu-table"), ["Area","Conference","Sweden","Netherlands","France"],
       TOPICS.map(t => [t.s, t.all.toFixed(1)+"%", `${t.se.toFixed(1)}% (${t.seN})`, `${t.nl.toFixed(1)}% (${t.nlN})`, `${t.fr.toFixed(1)}% (${t.frN})`]));
+
+    const eu3Topics = EU3_KEYS.map(k => TOPICS.find(t => t.s === k));
+    grouped(document.getElementById("eu3-bars"), EU3_KEYS, [
+      {data: eu3Topics.map(t => t.all), cls:"g"},
+      {data: eu3Topics.map(t => t.de), cls:"o"},
+      {data: eu3Topics.map(t => t.uk), cls:"s"},
+      {data: eu3Topics.map(t => t.ch), cls:""}
+    ], 16);
+    table(document.getElementById("eu3-table"), ["Area","Conference","Germany","United Kingdom","Switzerland"],
+      TOPICS.map(t => [t.s, t.all.toFixed(1)+"%", `${t.de.toFixed(1)}% (${t.deN})`, `${t.uk.toFixed(1)}% (${t.ukN})`, `${t.ch.toFixed(1)}% (${t.chN})`]));
 
     grouped(document.getElementById("wh-bars"), WH_UNI.map(u => u.k), [
       {data: WH_UNI.map(u => u.any), cls:"g"},
