@@ -242,6 +242,94 @@
       <div class="fold-inner" style="overflow:auto"><table id="eu3-table"></table></div>
     </details>
 
+    <h2>具身与自动驾驶：英、瑞、荷</h2>
+    <p>官方第一标签把机器人与驾驶混在一起。下面按标题拆开自动驾驶：含 autonomous driving、end-to-end driving、DriveVA、traffic element 等。其余官方具身论文算机器人。英国排除 UNSW；布鲁塞尔自由大学不计荷兰。</p>
+    <div class="stats" style="grid-template-columns:repeat(3,1fr)">
+      <div class="stat"><b>6</b><span>英国 AD · 合作中 / 加 / 美</span></div>
+      <div class="stat"><b>0</b><span>瑞士 AD · 6 篇都是机器人</span></div>
+      <div class="stat"><b>2</b><span>荷兰 AD · 合作几乎只有中国</span></div>
+    </div>
+    <div class="cols3">
+      <div class="card"><h3>英国：DeepMind + Oxford</h3><p class="muted">6 篇 AD。PriorEye 纯牛津；BeyondSight、LMGenDrive 走 DeepMind，合作加拿大、美国、香港、中国。另有 Cambridge/Bath 的 DriveVA（与荷兰、小米）、Southampton 与 Bosch 的交通要素、Glasgow 的驾驶世界生成（视频生成标签）。其余约 10 篇具身是操作、VLA、导航，合作更偏中国。</p></div>
+      <div class="card"><h3>瑞士：ETH 系机器人</h3><p class="muted">标题层面 0 篇自动驾驶。6 篇具身是操作、仿真、目标导航、协同活动。单位几乎全是 ETH / EPFL / UZH，外加华为苏黎世。合作美国 3、中国 2、英国 2、德国 1、沙特 1。</p></div>
+      <div class="card"><h3>荷兰：只有 2 篇 AD</h3><p class="muted">DriveVA（Twente × 小米 × Cambridge/Bath）和武科大/南科大 × VU Amsterdam 的 sim2real。没有 DeepMind 那种端到端主场。Delft 的 MobileOcc、厨房事件相机是机器人；Eindhoven 轨迹预测合作 RWTH，贴近驾驶但标题未写 AD。</p></div>
+    </div>
+    <details class="paper-fold">
+      <summary>展开英国 6 篇自动驾驶</summary>
+      <div class="fold-inner" style="overflow:auto">
+        <table>
+          <thead><tr><th>论文</th><th>英国单位</th><th>其他国家</th><th>标签</th></tr></thead>
+          <tbody>
+            <tr><td>PriorEye: Geospatial Visual Priors for End-to-End Autonomous Driving</td><td>Oxford</td><td>无</td><td>具身</td></tr>
+            <tr><td>BeyondSight: Object Permanence for End-to-End Autonomous Driving</td><td>DeepMind</td><td>加拿大、美国</td><td>具身</td></tr>
+            <tr><td>LMGenDrive: Bridging Multimodal Understanding and Generative World Modeling for End-to-End Driving</td><td>DeepMind</td><td>香港、加拿大、中国、美国</td><td>具身</td></tr>
+            <tr><td>DriveVA: Video Action Models are Zero-Shot Drivers</td><td>Cambridge、Bath</td><td>荷兰、中国</td><td>具身</td></tr>
+            <tr><td>Plug-and-Play Traffic Element Awareness for End-to-End Autonomous Driving</td><td>Southampton</td><td>中国、新加坡、德国</td><td>具身</td></tr>
+            <tr><td>Composing Driving Worlds through Disentangled Control for Adversarial Scenario Generation</td><td>Glasgow</td><td>日本</td><td>视频生成</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </details>
+    <details class="paper-fold">
+      <summary>展开瑞士 6 篇具身（均为机器人）</summary>
+      <div class="fold-inner" style="overflow:auto">
+        <table>
+          <thead><tr><th>论文</th><th>瑞士单位</th><th>其他国家</th><th>方向</th></tr></thead>
+          <tbody>
+            <tr><td>3DWay: Generalizing Robot Manipulation via 3D Consistent Waypoints</td><td>ETH</td><td>中国、美国</td><td>操作</td></tr>
+            <tr><td>SPEAR: A Simulator for Photorealistic Embodied AI Research</td><td>ETH（兼 Imperial）</td><td>美国、中国、英国</td><td>仿真</td></tr>
+            <tr><td>CoMind: Understanding Collaborative Human Activity from Multiple Minds and Views</td><td>ETH / Microsoft / MPI</td><td>德国</td><td>协同活动</td></tr>
+            <tr><td>What Matters in RL-Based Methods for Object-Goal Navigation?</td><td>EPFL、ETH、UZH、DeepMind</td><td>英国</td><td>导航</td></tr>
+            <tr><td>ContextFlow: In-Context Flow Matching for Robot Manipulation</td><td>华为苏黎世</td><td>沙特、美国</td><td>操作</td></tr>
+            <tr><td>SkillSpotter: Pose-Aware Multi-View Skilled Action Detection</td><td>ETH</td><td>无</td><td>技能检测</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </details>
+    <details class="paper-fold">
+      <summary>展开荷兰 5 篇具身（含 2 篇 AD）</summary>
+      <div class="fold-inner" style="overflow:auto">
+        <table>
+          <thead><tr><th>论文</th><th>荷兰单位</th><th>其他国家</th><th>方向</th></tr></thead>
+          <tbody>
+            <tr><td>DriveVA: Video Action Models are Zero-Shot Drivers</td><td>Twente</td><td>中国、英国</td><td>自动驾驶</td></tr>
+            <tr><td>Unpaired Geometry-Guided Sim2Real Translation for Autonomous Driving</td><td>VU Amsterdam</td><td>中国</td><td>自动驾驶</td></tr>
+            <tr><td>Towards Metric-Agnostic Trajectory Forecasting</td><td>Eindhoven</td><td>德国</td><td>轨迹预测</td></tr>
+            <tr><td>MobileOcc: A Human-Aware Semantic Occupancy Dataset for Mobile Robots</td><td>Delft</td><td>瑞典（KTH 双单位）</td><td>机器人占据</td></tr>
+            <tr><td>Cooking beyond Frames: A Stereo Event Camera Dataset in the Kitchen</td><td>Delft</td><td>无</td><td>具身数据集</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </details>
+
+    <h2>Valeo / valeo.ai</h2>
+    <p>口径：<a href="https://valeoai.github.io/posts/eccv-2026">valeo.ai 官方 ECCV 2026 博文</a>列出的论文，不是对 2834 篇单位字符串的穷尽扫描（其他 Valeo 工厂或德国/埃及实验室可能另有署名）。主会 3 篇、workshop 2 篇。主会走生成与表征，真正的驾驶策略和 scaling 放在 workshop——和法国“视频生成高、具身仅 1 篇”一致。</p>
+    <div class="stats" style="grid-template-columns:repeat(3,1fr)">
+      <div class="stat"><b>3</b><span>主会 · Re2Pix / CoReDi / SSDD</span></div>
+      <div class="stat"><b>2</b><span>Workshop · VATIX / Pictura</span></div>
+      <div class="stat"><b>巴黎</b><span>valeo.ai · Cord / Bursuc；合作希腊与 Meta FAIR</span></div>
+    </div>
+    <div class="cols3">
+      <div class="card"><h3>主会：世界模型与 tokenizer</h3><p class="muted">Re2Pix 先在基础模型特征里预测场景再渲染驾驶视频。CoReDi 让语义表征与扩散一起演化。SSDD 是无 GAN 的单步扩散解码器，可替换 KL-VAE。三篇都不是经典占用栅格 / 端到端规划。</p></div>
+      <div class="card"><h3>Workshop：才直接开车</h3><p class="muted">VATIX（DriveX）用最多 5500 小时驾驶数据做视频扩散 scaling，训到 9B。Pictura（workshop oral）是 GPU 多车仿真器，用纯透视图像 self-play 训 Alberti，约 3500 万公里。</p></div>
+      <div class="card"><h3>合作网络</h3><p class="muted">Re2Pix / CoReDi 绑希腊 Archimedes、NTUA、克里特大学。SSDD 绑 Meta FAIR 与 Sorbonne（Cord 双单位）。Pictura 还有 Créteil 的 Valeo Brain。</p></div>
+    </div>
+    <details class="paper-fold">
+      <summary>展开 Valeo 5 篇论文</summary>
+      <div class="fold-inner" style="overflow:auto">
+        <table>
+          <thead><tr><th>论文</th><th>会场</th><th>方向</th><th>合作</th></tr></thead>
+          <tbody>
+            <tr><td>Re2Pix: Representations Before Pixels — Semantics-Guided Hierarchical Video Prediction</td><td>主会</td><td>驾驶视频预测</td><td>希腊 Archimedes / NTUA / 克里特</td></tr>
+            <tr><td>CoReDi: Coevolving Representations in Joint Image-Feature Diffusion</td><td>主会</td><td>图像–特征扩散</td><td>希腊 Archimedes / NTUA / 克里特</td></tr>
+            <tr><td>SSDD: Single-Step Diffusion Decoder for Efficient Image Tokenization</td><td>主会</td><td>Tokenizer / 扩散解码</td><td>Meta FAIR、Sorbonne</td></tr>
+            <tr><td>VATIX: How Far Can 5,500 Hours of Driving Take You?</td><td>DriveX workshop</td><td>驾驶视频扩散 scaling</td><td>valeo.ai 内部</td></tr>
+            <tr><td>Pictura: Perspective-View Self-Play at Scale for Driving</td><td>Workshop oral</td><td>透视 self-play 驾驶</td><td>Valeo Brain、Sorbonne</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </details>
+
     <h2>Uncertainty / conformal / calibration / OOD / AL</h2>
     <p>大会没有单独的 uncertainty 领域。标题点名 UQ、conformal、校准、OOD detection，或含 active 且以采集更多数据再训练/更新模型为目的，合计约 1.5%。OOD detection 9 篇；主动采集 7 篇；conformal 3 篇。</p>
     <div class="stats">
@@ -334,7 +422,7 @@
     </details>
   </main>
   <footer>
-    分析日期 2026-09-13 · 数据：<a href="https://eccv.ecva.net/virtual/2026/papers.html">ECCV 2026 virtual site</a>、<a href="https://eccv.ecva.net/Conferences/2026/AcceptedPapers">Accepted Papers</a>。
+    分析日期 2026-09-17 · 数据：<a href="https://eccv.ecva.net/virtual/2026/papers.html">ECCV 2026 virtual site</a>、<a href="https://eccv.ecva.net/Conferences/2026/AcceptedPapers">Accepted Papers</a>。
     本页为静态交互页面，可托管在 GitHub Pages。作者主页：<a href="https://xzleo.github.io">xzleo.github.io</a>
     · <a href="eccv2026-en.html">English version</a>
   </footer>

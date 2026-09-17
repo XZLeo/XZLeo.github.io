@@ -242,6 +242,94 @@
       <div class="fold-inner" style="overflow:auto"><table id="eu3-table"></table></div>
     </details>
 
+    <h2>Embodied AI and autonomous driving: UK, Switzerland, Netherlands</h2>
+    <p>The official first keyword mixes robotics and driving. Autonomous driving below means the title names autonomous driving, end-to-end driving, DriveVA, or traffic-element awareness. Other papers in the official embodied area are counted as robotics. UNSW is excluded from the UK; Vrije Universiteit Brussel is not counted as the Netherlands.</p>
+    <div class="stats" style="grid-template-columns:repeat(3,1fr)">
+      <div class="stat"><b>6</b><span>UK AD · China / Canada / US collab</span></div>
+      <div class="stat"><b>0</b><span>Swiss AD · all 6 embodied papers are robotics</span></div>
+      <div class="stat"><b>2</b><span>Dutch AD · almost only China as partner</span></div>
+    </div>
+    <div class="cols3">
+      <div class="card"><h3>UK: DeepMind + Oxford</h3><p class="muted">Six AD papers. PriorEye is Oxford-only. BeyondSight and LMGenDrive go through DeepMind, with Canada, the US, Hong Kong, and China. DriveVA is Cambridge / Bath with Twente and Xiaomi; Southampton partners Bosch; Glasgow has a driving-world generation paper in the video-generation area. About ten other embodied papers are manipulation, VLA, and navigation, more often with China.</p></div>
+      <div class="card"><h3>Switzerland: ETH robotics</h3><p class="muted">Zero title-level AD papers. The six embodied papers are manipulation, simulation, object-goal navigation, and collaborative activity. Hubs: ETH / EPFL / UZH, plus Huawei Zurich. Partners: US (3), China (2), UK (2), Germany (1), Saudi Arabia (1).</p></div>
+      <div class="card"><h3>Netherlands: only two AD papers</h3><p class="muted">DriveVA (Twente × Xiaomi × Cambridge / Bath) and a sim2real paper from WUST / SUSTech × VU Amsterdam. No DeepMind-style end-to-end home paper. Delft’s MobileOcc and kitchen event-camera set are robotics; Eindhoven trajectory forecasting with RWTH is driving-adjacent but not titled as AD.</p></div>
+    </div>
+    <details class="paper-fold">
+      <summary>Show 6 UK autonomous-driving papers</summary>
+      <div class="fold-inner" style="overflow:auto">
+        <table>
+          <thead><tr><th>Paper</th><th>UK lab</th><th>Other countries</th><th>Area</th></tr></thead>
+          <tbody>
+            <tr><td>PriorEye: Geospatial Visual Priors for End-to-End Autonomous Driving</td><td>Oxford</td><td>None</td><td>Embodied</td></tr>
+            <tr><td>BeyondSight: Object Permanence for End-to-End Autonomous Driving</td><td>DeepMind</td><td>Canada, US</td><td>Embodied</td></tr>
+            <tr><td>LMGenDrive: Bridging Multimodal Understanding and Generative World Modeling for End-to-End Driving</td><td>DeepMind</td><td>Hong Kong, Canada, China, US</td><td>Embodied</td></tr>
+            <tr><td>DriveVA: Video Action Models are Zero-Shot Drivers</td><td>Cambridge, Bath</td><td>Netherlands, China</td><td>Embodied</td></tr>
+            <tr><td>Plug-and-Play Traffic Element Awareness for End-to-End Autonomous Driving</td><td>Southampton</td><td>China, Singapore, Germany</td><td>Embodied</td></tr>
+            <tr><td>Composing Driving Worlds through Disentangled Control for Adversarial Scenario Generation</td><td>Glasgow</td><td>Japan</td><td>Video generation</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </details>
+    <details class="paper-fold">
+      <summary>Show 6 Swiss embodied papers (all robotics)</summary>
+      <div class="fold-inner" style="overflow:auto">
+        <table>
+          <thead><tr><th>Paper</th><th>Swiss lab</th><th>Other countries</th><th>Focus</th></tr></thead>
+          <tbody>
+            <tr><td>3DWay: Generalizing Robot Manipulation via 3D Consistent Waypoints</td><td>ETH</td><td>China, US</td><td>Manipulation</td></tr>
+            <tr><td>SPEAR: A Simulator for Photorealistic Embodied AI Research</td><td>ETH (joint Imperial)</td><td>US, China, UK</td><td>Simulation</td></tr>
+            <tr><td>CoMind: Understanding Collaborative Human Activity from Multiple Minds and Views</td><td>ETH / Microsoft / MPI</td><td>Germany</td><td>Activity</td></tr>
+            <tr><td>What Matters in RL-Based Methods for Object-Goal Navigation?</td><td>EPFL, ETH, UZH, DeepMind</td><td>UK</td><td>Navigation</td></tr>
+            <tr><td>ContextFlow: In-Context Flow Matching for Robot Manipulation</td><td>Huawei Zurich</td><td>Saudi Arabia, US</td><td>Manipulation</td></tr>
+            <tr><td>SkillSpotter: Pose-Aware Multi-View Skilled Action Detection</td><td>ETH</td><td>None</td><td>Skill detection</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </details>
+    <details class="paper-fold">
+      <summary>Show 5 Dutch embodied papers (2 AD)</summary>
+      <div class="fold-inner" style="overflow:auto">
+        <table>
+          <thead><tr><th>Paper</th><th>Dutch lab</th><th>Other countries</th><th>Focus</th></tr></thead>
+          <tbody>
+            <tr><td>DriveVA: Video Action Models are Zero-Shot Drivers</td><td>Twente</td><td>China, UK</td><td>Autonomous driving</td></tr>
+            <tr><td>Unpaired Geometry-Guided Sim2Real Translation for Autonomous Driving</td><td>VU Amsterdam</td><td>China</td><td>Autonomous driving</td></tr>
+            <tr><td>Towards Metric-Agnostic Trajectory Forecasting</td><td>Eindhoven</td><td>Germany</td><td>Trajectory</td></tr>
+            <tr><td>MobileOcc: A Human-Aware Semantic Occupancy Dataset for Mobile Robots</td><td>Delft</td><td>Sweden (KTH dual affil.)</td><td>Robot occupancy</td></tr>
+            <tr><td>Cooking beyond Frames: A Stereo Event Camera Dataset in the Kitchen</td><td>Delft</td><td>None</td><td>Embodied dataset</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </details>
+
+    <h2>Valeo / valeo.ai</h2>
+    <p>Source: the <a href="https://valeoai.github.io/posts/eccv-2026">official valeo.ai ECCV 2026 post</a>, not an exhaustive scan of all 2,834 affiliation strings (other Valeo sites may appear elsewhere). Three main-conference papers and two workshops. The main track is generation and representation; the actual driving policy and scaling study are in workshops — the same pattern as France overall (high video generation, only one embodied paper).</p>
+    <div class="stats" style="grid-template-columns:repeat(3,1fr)">
+      <div class="stat"><b>3</b><span>Main conference · Re2Pix / CoReDi / SSDD</span></div>
+      <div class="stat"><b>2</b><span>Workshops · VATIX / Pictura</span></div>
+      <div class="stat"><b>Paris</b><span>valeo.ai · Cord / Bursuc; Greece and Meta FAIR</span></div>
+    </div>
+    <div class="cols3">
+      <div class="card"><h3>Main track: world models and tokenizers</h3><p class="muted">Re2Pix predicts scene structure in foundation-model features, then renders driving video. CoReDi lets the semantic space coevolve with diffusion. SSDD is a GAN-free single-step diffusion decoder that can replace a KL-VAE. None is classic occupancy or end-to-end planning.</p></div>
+      <div class="card"><h3>Workshops: where they actually drive</h3><p class="muted">VATIX (DriveX) is a scaling-law study of video diffusion on up to 5,500 hours of driving, up to 9B parameters. Pictura (workshop oral) is a GPU multi-agent simulator that trains Alberti by self-play from perspective images, about 35 million km.</p></div>
+      <div class="card"><h3>Collaborators</h3><p class="muted">Re2Pix and CoReDi tie to Greece (Archimedes, NTUA, University of Crete). SSDD ties to Meta FAIR and Sorbonne (Cord dual affiliation). Pictura also lists Valeo Brain in Créteil.</p></div>
+    </div>
+    <details class="paper-fold">
+      <summary>Show 5 Valeo papers</summary>
+      <div class="fold-inner" style="overflow:auto">
+        <table>
+          <thead><tr><th>Paper</th><th>Venue</th><th>Focus</th><th>Partners</th></tr></thead>
+          <tbody>
+            <tr><td>Re2Pix: Representations Before Pixels — Semantics-Guided Hierarchical Video Prediction</td><td>Main</td><td>Driving video prediction</td><td>Greece: Archimedes / NTUA / Crete</td></tr>
+            <tr><td>CoReDi: Coevolving Representations in Joint Image-Feature Diffusion</td><td>Main</td><td>Image–feature diffusion</td><td>Greece: Archimedes / NTUA / Crete</td></tr>
+            <tr><td>SSDD: Single-Step Diffusion Decoder for Efficient Image Tokenization</td><td>Main</td><td>Tokenizer / diffusion decoder</td><td>Meta FAIR, Sorbonne</td></tr>
+            <tr><td>VATIX: How Far Can 5,500 Hours of Driving Take You?</td><td>DriveX workshop</td><td>Driving video-diffusion scaling</td><td>valeo.ai internal</td></tr>
+            <tr><td>Pictura: Perspective-View Self-Play at Scale for Driving</td><td>Workshop oral</td><td>Perspective self-play driving</td><td>Valeo Brain, Sorbonne</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </details>
+
     <h2>Uncertainty / conformal / calibration / OOD / AL</h2>
     <p>There is no official uncertainty area. Titles that name UQ, conformal prediction, confidence calibration, OOD detection, or <em>active</em> data collection for (re)training are about 1.5% of the conference. OOD detection: 9. Active collection: 7. Conformal: 3.</p>
     <div class="stats">
@@ -334,7 +422,7 @@
     </details>
   </main>
   <footer>
-    Analysis date 13 September 2026 · Data:
+    Analysis date 17 September 2026 · Data:
     <a href="https://eccv.ecva.net/virtual/2026/papers.html">ECCV 2026 virtual site</a>,
     <a href="https://eccv.ecva.net/Conferences/2026/AcceptedPapers">Accepted Papers</a>.
     Static interactive page for GitHub Pages.
